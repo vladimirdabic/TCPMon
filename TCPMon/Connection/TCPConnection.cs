@@ -24,6 +24,7 @@ namespace TCPMon.Connection
         private bool _connected = false;
         private List<BytePacket> _packets;
         private TcpClient _client;
+        private NetworkStream _stream;
 
         public TCPConnection(string connectionName)
         {
@@ -77,15 +78,15 @@ namespace TCPMon.Connection
 
         private void Listener()
         {
-            NetworkStream stream = _client.GetStream();
+            _stream = _client.GetStream();
             _connected = true;
 
             while(_connected)
             {
-                if(stream.DataAvailable)
+                if(_stream.DataAvailable)
                 {
                     byte[] data = new byte[_client.Available];
-                    stream.Read(data, 0, data.Length);
+                    _stream.Read(data, 0, data.Length);
 
                     BytePacket packet = new BytePacket(data, DateTime.Now);
                     _packets.Add(packet);
@@ -103,6 +104,12 @@ namespace TCPMon.Connection
         static bool IsSocketConnected(Socket s)
         {
             return !((s.Poll(1000, SelectMode.SelectRead) && (s.Available == 0)) || !s.Connected);
+        }
+
+        public void Send(byte[] data)
+        {
+            if (!_connected) return;
+            _stream.Write(data, 0, data.Length);
         }
     }
 }

@@ -35,6 +35,7 @@ namespace TCPMon
 
                 ConnectionControl control = new ConnectionControl(connection);
                 control.MonitorClicked += Control_MonitorClicked;
+                control.SendDataClicked += Control_SendDataClicked; ;
                 connectionPanel.Controls.Add(control);
                 _connectionControls.Add(control);
 
@@ -44,6 +45,17 @@ namespace TCPMon
             {
                 MessageBox.Show(ex.Message, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch(FormatException)
+            {
+                MessageBox.Show("Port must be a number", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Control_SendDataClicked(object sender, EventArgs e)
+        {
+            IConnection connection = ((ConnectionControl)sender).Connection;
+            SendForm sendForm = new SendForm(connection);
+            sendForm.Show();
         }
 
         private void Control_MonitorClicked(object sender, EventArgs e)

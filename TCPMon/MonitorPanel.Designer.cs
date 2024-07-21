@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.packetListPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.packetHexBox = new Be.Windows.Forms.HexBox();
             this.clearPackets = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // packetListPanel
@@ -77,6 +79,7 @@
             this.clearPackets.Name = "clearPackets";
             this.clearPackets.Size = new System.Drawing.Size(20, 20);
             this.clearPackets.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.clearPackets, "Clear");
             this.clearPackets.UseVisualStyleBackColor = true;
             this.clearPackets.Click += new System.EventHandler(this.clearPackets_Click);
             // 
@@ -101,5 +104,6 @@
         private System.Windows.Forms.Label label1;
         private Be.Windows.Forms.HexBox packetHexBox;
         private System.Windows.Forms.Button clearPackets;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

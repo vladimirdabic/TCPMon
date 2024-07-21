@@ -15,6 +15,7 @@ namespace TCPMon
     {
         public IConnection Connection { get; private set; }
         public event EventHandler MonitorClicked;
+        public event EventHandler SendDataClicked;
 
         public ConnectionControl()
         {
@@ -35,6 +36,11 @@ namespace TCPMon
         private void closeConn_Click(object sender, EventArgs e)
         {
             Connection.Close();
+        }
+
+        private void sendData_Click(object sender, EventArgs e)
+        {
+            SendDataClicked?.Invoke(this, null);
         }
     }
 }

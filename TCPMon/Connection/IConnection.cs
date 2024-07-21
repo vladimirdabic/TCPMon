@@ -16,6 +16,7 @@ namespace TCPMon.Connection
         event PacketEventHandler PacketReceived;
         event ConnectionEventHandler ConnectionClosed;
 
+        void Send(byte[] data);
         void ClearPackets();
         void Close();
     }
