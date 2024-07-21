@@ -26,14 +26,19 @@ namespace TCPMon
 
         public static void PrintLine(string message, Color color)
         {
-            if (!string.IsNullOrWhiteSpace(_consoleInstance.Text))
+            Action action = delegate
             {
-                _consoleInstance.AppendText("\r\n" + message, color);
-            }
-            else
-            {
-                _consoleInstance.AppendText(message, color);
-            }
+                if (!string.IsNullOrWhiteSpace(_consoleInstance.Text))
+                {
+                    _consoleInstance.AppendText("\r\n" + message, color);
+                }
+                else
+                {
+                    _consoleInstance.AppendText(message, color);
+                }
+            };
+
+            _consoleInstance.Invoke(action);
         }
 
         public static void PrintLine(string message) { PrintLine(message, Color.Black); }
@@ -45,16 +50,33 @@ namespace TCPMon
 
             try
             {
-                TCPConnection connection = new TCPConnection(_newForm.ConnectionName);
-                PrintLine($"[{connection.Name} - {_newForm.Parameters.IPAddress}:{_newForm.Parameters.Port}] Attempting connection...");
+                IConnection connection;
+                PrintLine($"[{_newForm.ConnectionName} - {_newForm.Parameters.IPAddress}:{_newForm.Parameters.Port}] Attempting connection...");
 
-                connection.Connect(_newForm.Parameters.IPAddress, _newForm.Parameters.Port);
+                switch(_newForm.ConnectionType)
+                {
+                    case "Basic":
+                        TCPConnection tcpConnection = new TCPConnection(_newForm.ConnectionName);
+                        connection = tcpConnection;
+                        tcpConnection.Connect(_newForm.Parameters.IPAddress, _newForm.Parameters.Port);
+                        break;
+
+                    case "Scripted":
+                        TCPScriptedConnection scriptedConn = new TCPScriptedConnection(_newForm.ConnectionName, ((ScriptedConnectionParameters)_newForm.Parameters).FilePath);
+                        connection = scriptedConn;
+                        scriptedConn.Connect(_newForm.Parameters.IPAddress, _newForm.Parameters.Port);
+                        break;
+
+                    default:
+                        throw new Exception("Unknown connection type");
+                }
+                
                 connection.ConnectionClosed += Connection_ConnectionClosed;
                 connection.PacketReceived += Connection_PacketReceived;
 
                 ConnectionControl control = new ConnectionControl(connection);
                 control.MonitorClicked += Control_MonitorClicked;
-                control.SendDataClicked += Control_SendDataClicked; ;
+                control.SendDataClicked += Control_SendDataClicked;
                 connectionPanel.Controls.Add(control);
                 _connectionControls.Add(control);
 

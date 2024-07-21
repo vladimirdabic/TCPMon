@@ -45,7 +45,7 @@ namespace TCPMon
 
                 case "Scripted":
                     Parameters = new ScriptedConnectionParameters();
-                    descBox.Text = "Send and receive data using scripts";
+                    descBox.Text = "Send and receive data using blaze scripts";
                     break;
             }
 
@@ -78,7 +78,16 @@ namespace TCPMon
         [Category("Script")]
         [DisplayName("File Path")]
         [Description("Path to the script file")]
-        [Editor(typeof(FileNameEditor), typeof(UITypeEditor))]
+        [Editor(typeof(BlazeFileNameEditor), typeof(UITypeEditor))]
         public string FilePath { get => _scriptPath; set => _scriptPath = value; }
+    }
+
+    public class BlazeFileNameEditor : FileNameEditor
+    {
+        protected override void InitializeDialog(OpenFileDialog openFileDialog)
+        {
+            base.InitializeDialog(openFileDialog);
+            openFileDialog.Filter = "Blaze Module files (*.blzm)|*.blzm";
+        }
     }
 }

@@ -36,6 +36,9 @@
     <Reference Include="Be.Windows.Forms.HexBox">
       <HintPath>..\..\..\..\Desktop\DLLS\Be.Windows.Forms.HexBox.dll</HintPath>
     </Reference>
+    <Reference Include="blzcore">
+      <HintPath>..\..\Blaze\Blaze Core\bin\Release\blzcore.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -50,6 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blaze\ConnectionValue.cs" />
+    <Compile Include="Blaze\Library.cs" />
+    <Compile Include="Blaze\ModuleValue.cs" />
+    <Compile Include="Blaze\Utils.cs" />
     <Compile Include="ConnectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -60,6 +67,7 @@
     <Compile Include="Connection\IConnection.cs" />
     <Compile Include="Connection\IPacket.cs" />
     <Compile Include="Connection\TCPConnection.cs" />
+    <Compile Include="Connection\TCPScriptedConnection.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
