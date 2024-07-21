@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.Design;
 
 namespace TCPMon
 {
@@ -38,7 +40,12 @@ namespace TCPMon
             {
                 case "Basic":
                     Parameters = new ConnectionParameters();
-                    descBox.Text = "A simple client connection";
+                    descBox.Text = "A basic client connection";
+                    break;
+
+                case "Scripted":
+                    Parameters = new ScriptedConnectionParameters();
+                    descBox.Text = "Send and receive data using scripts";
                     break;
             }
 
@@ -62,5 +69,16 @@ namespace TCPMon
         [Description("The target port")]
         [DefaultValue(80)]
         public int Port { get => _port; set => _port = value; }
+    }
+
+    public class ScriptedConnectionParameters : ConnectionParameters
+    {
+        private string _scriptPath;
+
+        [Category("Script")]
+        [DisplayName("File Path")]
+        [Description("Path to the script file")]
+        [Editor(typeof(FileNameEditor), typeof(UITypeEditor))]
+        public string FilePath { get => _scriptPath; set => _scriptPath = value; }
     }
 }
