@@ -1,5 +1,5 @@
 # TCPMon
-TCPMon is a program that allows you to send and receive data from TCP connections.\
+TCPMon is a program that allows you to send and receive data using TCP connections.\
 It's useful for debugging a protocol that you might be implementing.
 
 ### BinarySchema
