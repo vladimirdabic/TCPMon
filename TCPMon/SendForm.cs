@@ -36,6 +36,7 @@ namespace TCPMon
         private void sendButton_Click(object sender, EventArgs e)
         {
             _connection.Send(_provider.Bytes.ToArray());
+            MainForm.PrintLine($"[{_connection.Name} - {_connection.Address}] Sent {_provider.Length} bytes");
         }
 
         private void _connection_ConnectionClosed(IConnection sender)

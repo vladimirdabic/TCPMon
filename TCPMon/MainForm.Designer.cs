@@ -35,6 +35,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.activeConns = new System.Windows.Forms.ToolStripStatusLabel();
             this.connectionPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.consoleBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -62,14 +63,14 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // closeAllToolStripMenuItem
             // 
             this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
-            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.closeAllToolStripMenuItem.Text = "Close All";
             this.closeAllToolStripMenuItem.Click += new System.EventHandler(this.closeAllToolStripMenuItem_Click);
             // 
@@ -95,14 +96,28 @@
             this.connectionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.connectionPanel.Location = new System.Drawing.Point(12, 27);
             this.connectionPanel.Name = "connectionPanel";
-            this.connectionPanel.Size = new System.Drawing.Size(684, 471);
+            this.connectionPanel.Size = new System.Drawing.Size(684, 327);
             this.connectionPanel.TabIndex = 5;
+            // 
+            // consoleBox
+            // 
+            this.consoleBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.consoleBox.HideSelection = false;
+            this.consoleBox.Location = new System.Drawing.Point(12, 360);
+            this.consoleBox.Name = "consoleBox";
+            this.consoleBox.ReadOnly = true;
+            this.consoleBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.consoleBox.Size = new System.Drawing.Size(684, 138);
+            this.consoleBox.TabIndex = 6;
+            this.consoleBox.Text = "";
+            this.consoleBox.WordWrap = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 523);
+            this.Controls.Add(this.consoleBox);
             this.Controls.Add(this.connectionPanel);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -128,6 +143,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel activeConns;
         private System.Windows.Forms.FlowLayoutPanel connectionPanel;
+        private System.Windows.Forms.RichTextBox consoleBox;
     }
 }
 

@@ -62,6 +62,10 @@ namespace TCPMon.Connection
                         throw new ConnectionException($"Error: {ex.Message} ({ex.SocketErrorCode})");
                 }
             }
+            catch(ArgumentOutOfRangeException ex)
+            {
+                throw new ConnectionException("Specified port is out of range");
+            }
         }
 
         public void ClearPackets()

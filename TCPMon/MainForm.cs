@@ -16,11 +16,27 @@ namespace TCPMon
     {
         private ConnectionForm _connForm = new ConnectionForm();
         private List<ConnectionControl> _connectionControls = new List<ConnectionControl>();
+        private static RichTextBox _consoleInstance;
 
         public MainForm()
         {
             InitializeComponent();
+            _consoleInstance = consoleBox;
         }
+
+        public static void PrintLine(string message, Color color)
+        {
+            if (!string.IsNullOrWhiteSpace(_consoleInstance.Text))
+            {
+                _consoleInstance.AppendText("\r\n" + message, color);
+            }
+            else
+            {
+                _consoleInstance.AppendText(message, color);
+            }
+        }
+
+        public static void PrintLine(string message) { PrintLine(message, Color.Black); }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -30,8 +46,11 @@ namespace TCPMon
             try
             {
                 TCPConnection connection = new TCPConnection(_connForm.nameTextBox.Text);
+                PrintLine($"[{connection.Name} - {_connForm.ipTextBox.Text}:{_connForm.portTextBox.Text}] Attempting connection...");
+
                 connection.Connect(_connForm.ipTextBox.Text, int.Parse(_connForm.portTextBox.Text));
                 connection.ConnectionClosed += Connection_ConnectionClosed;
+                connection.PacketReceived += Connection_PacketReceived;
 
                 ConnectionControl control = new ConnectionControl(connection);
                 control.MonitorClicked += Control_MonitorClicked;
@@ -40,15 +59,22 @@ namespace TCPMon
                 _connectionControls.Add(control);
 
                 activeConns.Text = $"Active Connections: {_connectionControls.Count}";
+                PrintLine($"[{connection.Name} - {connection.Address}] Connection established", Color.Green);
             }
             catch(ConnectionException ex)
             {
-                MessageBox.Show(ex.Message, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                PrintLine($"[{_connForm.nameTextBox.Text} - {_connForm.ipTextBox.Text}:{_connForm.portTextBox.Text}] Connection failed: {ex.Message}", Color.Orange);
             }
             catch(FormatException)
             {
-                MessageBox.Show("Port must be a number", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                PrintLine($"[{_connForm.nameTextBox.Text} - {_connForm.ipTextBox.Text}:{_connForm.portTextBox.Text}] Connection failed: port must be a number", Color.Orange);
             }
+        }
+
+        private void Connection_PacketReceived(IConnection sender, IPacket packet)
+        {
+            Action action = () => PrintLine($"[{sender.Name} - {sender.Address}] Received {packet.Data.Length} bytes", Color.Gray);
+            Invoke(action);
         }
 
         private void Control_SendDataClicked(object sender, EventArgs e)
@@ -67,7 +93,7 @@ namespace TCPMon
 
         private void Connection_ConnectionClosed(IConnection sender)
         {
-            Action a = delegate
+            Action action = delegate
             {
                 foreach (ConnectionControl control in _connectionControls)
                 {
@@ -81,9 +107,12 @@ namespace TCPMon
                 }
 
                 activeConns.Text = $"Active Connections: {_connectionControls.Count}";
+                PrintLine($"[{sender.Name} - {sender.Address}] Connection closed", Color.Red);
+
+                sender.PacketReceived -= Connection_PacketReceived;
             };
 
-            Invoke(a);
+            Invoke(action);
         }
 
         private void closeAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -92,4 +121,18 @@ namespace TCPMon
                 control.Connection.Close();
         }
     }
+
+    public static class RichTextBoxExtensions
+    {
+        public static void AppendText(this RichTextBox box, string text, Color color)
+        {
+            box.SelectionStart = box.TextLength;
+            box.SelectionLength = 0;
+
+            box.SelectionColor = color;
+            box.AppendText(text);
+            box.SelectionColor = box.ForeColor;
+        }
+    }
 }
+
