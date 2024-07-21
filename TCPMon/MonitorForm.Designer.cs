@@ -67,8 +67,9 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.monitorPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "MonitorForm";
-            this.Text = "TCPMon - Packet Monitor";
+            this.Text = "TCPMon - Data Monitor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MonitorForm_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

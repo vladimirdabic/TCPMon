@@ -14,8 +14,8 @@ namespace TCPMon
 {
     public partial class MainForm : Form
     {
-        private ConnectionForm _connForm = new ConnectionForm();
-        private List<ConnectionControl> _connectionControls = new List<ConnectionControl>();
+        private readonly NewForm _newForm = new NewForm();
+        private readonly List<ConnectionControl> _connectionControls = new List<ConnectionControl>();
         private static RichTextBox _consoleInstance;
 
         public MainForm()
@@ -40,15 +40,15 @@ namespace TCPMon
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult result = _connForm.ShowDialog();
+            DialogResult result = _newForm.ShowDialog();
             if (result != DialogResult.OK) return;
 
             try
             {
-                TCPConnection connection = new TCPConnection(_connForm.nameTextBox.Text);
-                PrintLine($"[{connection.Name} - {_connForm.ipTextBox.Text}:{_connForm.portTextBox.Text}] Attempting connection...");
+                TCPConnection connection = new TCPConnection(_newForm.ConnectionName);
+                PrintLine($"[{connection.Name} - {_newForm.Parameters.IPAddress}:{_newForm.Parameters.Port}] Attempting connection...");
 
-                connection.Connect(_connForm.ipTextBox.Text, int.Parse(_connForm.portTextBox.Text));
+                connection.Connect(_newForm.Parameters.IPAddress, _newForm.Parameters.Port);
                 connection.ConnectionClosed += Connection_ConnectionClosed;
                 connection.PacketReceived += Connection_PacketReceived;
 
@@ -63,11 +63,11 @@ namespace TCPMon
             }
             catch(ConnectionException ex)
             {
-                PrintLine($"[{_connForm.nameTextBox.Text} - {_connForm.ipTextBox.Text}:{_connForm.portTextBox.Text}] Connection failed: {ex.Message}", Color.Orange);
+                PrintLine($"[{_newForm.ConnectionName} - {_newForm.Parameters.IPAddress}:{_newForm.Parameters.Port}] Connection failed: {ex.Message}", Color.Orange);
             }
             catch(FormatException)
             {
-                PrintLine($"[{_connForm.nameTextBox.Text} - {_connForm.ipTextBox.Text}:{_connForm.portTextBox.Text}] Connection failed: port must be a number", Color.Orange);
+                PrintLine($"[{_newForm.ConnectionName} - {_newForm.Parameters.IPAddress}:{_newForm.Parameters.Port}] Connection failed: Port must be a number", Color.Orange);
             }
         }
 

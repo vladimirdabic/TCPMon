@@ -55,12 +55,6 @@
     <Compile Include="ConnectionControl.Designer.cs">
       <DependentUpon>ConnectionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConnectionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ConnectionForm.Designer.cs">
-      <DependentUpon>ConnectionForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Connection\BytePacket.cs" />
     <Compile Include="Connection\IConnection.cs" />
     <Compile Include="Connection\IPacket.cs" />
@@ -83,6 +77,12 @@
     <Compile Include="MonitorPanel.Designer.cs">
       <DependentUpon>MonitorPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewForm.Designer.cs">
+      <DependentUpon>NewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PacketControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,9 +100,6 @@
     <EmbeddedResource Include="ConnectionControl.resx">
       <DependentUpon>ConnectionControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConnectionForm.resx">
-      <DependentUpon>ConnectionForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -111,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MonitorPanel.resx">
       <DependentUpon>MonitorPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewForm.resx">
+      <DependentUpon>NewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PacketControl.resx">
       <DependentUpon>PacketControl.cs</DependentUpon>

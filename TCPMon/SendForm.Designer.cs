@@ -86,6 +86,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.packetHexBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "SendForm";
             this.Text = "TCPMon - Sender";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SendForm_FormClosing);
