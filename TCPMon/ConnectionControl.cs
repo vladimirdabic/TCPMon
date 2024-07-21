@@ -24,7 +24,7 @@ namespace TCPMon
         public ConnectionControl(IConnection connection) : this()
         {
             Connection = connection;
-            conName.Text = $"{Connection.ConnectionName} ({Connection.ConnectionAddress})";
+            conName.Text = $"{Connection.Name} ({Connection.Address})";
         }
 
         private void monitorButton_Click(object sender, EventArgs e)

@@ -32,6 +32,8 @@ namespace TCPMon
                 Connection.PacketReceived -= Connection_PacketReceived;
             }
 
+            if (connection == null) return;
+
             Connection = connection;
             connection.PacketReceived += Connection_PacketReceived;
 

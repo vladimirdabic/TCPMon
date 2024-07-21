@@ -49,18 +49,14 @@ namespace TCPMon
         private void Control_MonitorClicked(object sender, EventArgs e)
         {
             IConnection connection = ((ConnectionControl)sender).Connection;
-
-            monitorPanel.Visible = true;
-            monitorPanel.SetConnection(connection);
+            MonitorForm monitorForm = new MonitorForm(connection);
+            monitorForm.Show();
         }
 
         private void Connection_ConnectionClosed(IConnection sender)
         {
             Action a = delegate
             {
-                if(monitorPanel.Connection == sender)
-                    monitorPanel.Visible = false;
-
                 foreach (ConnectionControl control in _connectionControls)
                 {
                     if (control.Connection == sender)

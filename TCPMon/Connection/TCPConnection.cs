@@ -11,9 +11,9 @@ namespace TCPMon.Connection
 {
     internal class TCPConnection : IConnection
     {
-        public string ConnectionName => _name;
-        public string ConnectionAddress => _client.Client.RemoteEndPoint.ToString();
-        public ConnectionType ConnectionType => ConnectionType.TCP;
+        public string Name => _name;
+        public string Address => _client.Client.RemoteEndPoint.ToString();
+        public ConnectionType Type => ConnectionType.TCP;
         public IPacket[] Packets => _packets.ToArray();
 
         public event PacketEventHandler PacketReceived;

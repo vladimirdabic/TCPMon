@@ -35,7 +35,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.activeConns = new System.Windows.Forms.ToolStripStatusLabel();
             this.connectionPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.monitorPanel = new TCPMon.MonitorPanel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -47,7 +46,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(1043, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(708, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -80,7 +79,7 @@
             this.activeConns});
             this.statusStrip1.Location = new System.Drawing.Point(0, 501);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1043, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(708, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
@@ -94,26 +93,16 @@
             // connectionPanel
             // 
             this.connectionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.connectionPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.connectionPanel.Location = new System.Drawing.Point(12, 27);
             this.connectionPanel.Name = "connectionPanel";
-            this.connectionPanel.Size = new System.Drawing.Size(174, 471);
+            this.connectionPanel.Size = new System.Drawing.Size(684, 471);
             this.connectionPanel.TabIndex = 5;
-            // 
-            // monitorPanel
-            // 
-            this.monitorPanel.Location = new System.Drawing.Point(192, 27);
-            this.monitorPanel.Name = "monitorPanel";
-            this.monitorPanel.Size = new System.Drawing.Size(839, 471);
-            this.monitorPanel.TabIndex = 6;
-            this.monitorPanel.Visible = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1043, 523);
-            this.Controls.Add(this.monitorPanel);
+            this.ClientSize = new System.Drawing.Size(708, 523);
             this.Controls.Add(this.connectionPanel);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -139,7 +128,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel activeConns;
         private System.Windows.Forms.FlowLayoutPanel connectionPanel;
-        private MonitorPanel monitorPanel;
     }
 }
 

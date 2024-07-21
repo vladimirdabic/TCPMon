@@ -8,9 +8,9 @@ namespace TCPMon.Connection
 {
     public interface IConnection
     {
-        string ConnectionName { get; }
-        string ConnectionAddress { get; }
-        ConnectionType ConnectionType { get; }
+        string Name { get; }
+        string Address { get; }
+        ConnectionType Type { get; }
         IPacket[] Packets { get; }
 
         event PacketEventHandler PacketReceived;

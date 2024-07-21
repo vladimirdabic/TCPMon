@@ -110,7 +110,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ConnectionForm";
-            this.Text = "New Connection";
+            this.Text = "TCPMon - New";
             this.ResumeLayout(false);
             this.PerformLayout();
 
