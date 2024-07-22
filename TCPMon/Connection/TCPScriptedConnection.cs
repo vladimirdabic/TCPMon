@@ -96,6 +96,14 @@ namespace TCPMon.Connection
                 {
                     MainForm.PrintLine($"[Blaze] {e.Message} ({_blazeModulePath})", Color.Orange);
                 }
+                catch (ArgumentNullException)
+                {
+                    MainForm.PrintLine($"[Blaze] Module file path parameter wasn't set", Color.Orange);
+                }
+                catch (FileNotFoundException)
+                {
+                    MainForm.PrintLine($"[Blaze] Module file not found ({_blazeModulePath})", Color.Orange);
+                }
 
                 Thread thread = new Thread(Listener)
                 {
