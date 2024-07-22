@@ -34,6 +34,7 @@ namespace TCPMon.Connection
         private ConnectionValue _blazeConnection;
         private string _blazeModulePath;
         private ModuleEnv _blazeConnectionModule;
+        private bool _blazeRunning;
 
         public TCPScriptedConnection(string connectionName, string blazeModulePath)
         {
@@ -80,6 +81,7 @@ namespace TCPMon.Connection
                         return;
                     }
 
+                    _blazeRunning = true;
                     _blazeVM.RunFunction(func, null);
                 }
                 catch (VMException e)
@@ -91,7 +93,7 @@ namespace TCPMon.Connection
                 }
                 catch (FileLoadException e)
                 {
-                    MainForm.PrintLine(e.Message);
+                    MainForm.PrintLine($"[Blaze] {e.Message} ({_blazeModulePath})", Color.Orange);
                 }
 
                 Thread thread = new Thread(Listener)
@@ -152,14 +154,14 @@ namespace TCPMon.Connection
                     PacketReceived?.Invoke(this, packet);
 
                     // TODO: Pass list of bytes or a custom object
-                    _blazeConnection.PacketsEvent.Raise(null);
+                    if(_blazeRunning) _blazeConnection.PacketsEvent.Raise(null);
                 }
 
                 if (!_connected || !IsSocketConnected(_client.Client)) _connected = false;
             }
 
 
-            _blazeConnection.ClosedEvent.Raise(null);
+            if(_blazeRunning) _blazeConnection.ClosedEvent.Raise(null);
             ConnectionClosed?.Invoke(this);
             _client.Close();
 
