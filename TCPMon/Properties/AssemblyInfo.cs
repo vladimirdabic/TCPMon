@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TCPMon")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Program that allows you to send and receive data using TCP connections.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("TCPMon")]
-[assembly: AssemblyCopyright("Copyright ©  2024")]
+[assembly: AssemblyCopyright("Copyright © 2024 Владимир Дабић")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
