@@ -33,7 +33,9 @@ namespace TCPMon
         public ScriptEditor()
         {
             InitializeComponent();
+
             KeyPreview = true;
+
 
             if (!Directory.Exists("scripts"))
                 Directory.CreateDirectory("scripts");
@@ -256,6 +258,11 @@ event connection.closed() {
 
             ListDirectory(treeView1, "scripts");
             //_clickedNode.Remove();
+        }
+
+        public new void CenterToParent()
+        {
+            base.CenterToParent();
         }
     }
 

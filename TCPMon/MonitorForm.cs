@@ -42,5 +42,10 @@ namespace TCPMon
             _connection.ConnectionClosed -= _connection_ConnectionClosed;
             monitorPanel.SetConnection(null);
         }
+
+        public new void CenterToParent()
+        {
+            base.CenterToParent();
+        }
     }
 }

@@ -115,14 +115,14 @@
             // blazeModuleToolStripMenuItem
             // 
             this.blazeModuleToolStripMenuItem.Name = "blazeModuleToolStripMenuItem";
-            this.blazeModuleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.blazeModuleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.blazeModuleToolStripMenuItem.Text = "Blaze Module";
             this.blazeModuleToolStripMenuItem.Click += new System.EventHandler(this.blazeModuleToolStripMenuItem_Click);
             // 
             // binarySchemaToolStripMenuItem
             // 
             this.binarySchemaToolStripMenuItem.Name = "binarySchemaToolStripMenuItem";
-            this.binarySchemaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.binarySchemaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.binarySchemaToolStripMenuItem.Text = "Binary Schema";
             this.binarySchemaToolStripMenuItem.Click += new System.EventHandler(this.binarySchemaToolStripMenuItem_Click);
             // 

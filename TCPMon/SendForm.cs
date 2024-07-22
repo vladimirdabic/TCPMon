@@ -50,5 +50,10 @@ namespace TCPMon
             // Unregister events
             _connection.ConnectionClosed -= _connection_ConnectionClosed;
         }
+
+        public new void CenterToParent()
+        {
+            base.CenterToParent();
+        }
     }
 }

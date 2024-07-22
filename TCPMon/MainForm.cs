@@ -45,6 +45,7 @@ namespace TCPMon
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            _newForm.StartPosition = FormStartPosition.CenterParent;
             DialogResult result = _newForm.ShowDialog();
             if (result != DialogResult.OK) return;
 
@@ -103,14 +104,16 @@ namespace TCPMon
         {
             IConnection connection = ((ConnectionControl)sender).Connection;
             SendForm sendForm = new SendForm(connection);
-            sendForm.Show();
+            sendForm.Show(this);
+            sendForm.CenterToParent();
         }
 
         private void Control_MonitorClicked(object sender, EventArgs e)
         {
             IConnection connection = ((ConnectionControl)sender).Connection;
             MonitorForm monitorForm = new MonitorForm(connection);
-            monitorForm.Show();
+            monitorForm.Show(this);
+            monitorForm.CenterToParent();
         }
 
         private void Connection_ConnectionClosed(IConnection sender)
@@ -146,7 +149,8 @@ namespace TCPMon
         private void editorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ScriptEditor editorForm = new ScriptEditor();
-            editorForm.Show();
+            editorForm.Show(this);
+            editorForm.CenterToParent();
         }
     }
 
