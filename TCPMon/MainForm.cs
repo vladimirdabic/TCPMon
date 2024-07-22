@@ -142,6 +142,12 @@ namespace TCPMon
             foreach(ConnectionControl control in _connectionControls)
                 control.Connection.Close();
         }
+
+        private void editorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ScriptEditor editorForm = new ScriptEditor();
+            editorForm.Show();
+        }
     }
 
     public static class RichTextBoxExtensions

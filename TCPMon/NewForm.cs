@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Design;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,6 +89,8 @@ namespace TCPMon
         {
             base.InitializeDialog(openFileDialog);
             openFileDialog.Filter = "Blaze Module files (*.blzm)|*.blzm";
+            openFileDialog.InitialDirectory = Path.Combine(Directory.GetCurrentDirectory(), "scripts");
+            openFileDialog.RestoreDirectory = true;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,6 +21,9 @@ namespace TCPMon
         {
             InternalModule = new ModuleEnv();
             Utils.CreateLibraries(InternalModule);
+
+            if (!Directory.Exists("scripts"))
+                Directory.CreateDirectory("scripts");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
