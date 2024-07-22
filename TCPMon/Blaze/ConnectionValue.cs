@@ -45,7 +45,7 @@ namespace TCPMon.Blaze
 
         public string GetName()
         {
-            return "module";
+            return "connection";
         }
 
         public IValue GetProperty(string name)

@@ -75,9 +75,9 @@ namespace TCPMon
     {
         private string _scriptPath;
 
-        [Category("Script")]
+        [Category("Blaze")]
         [DisplayName("File Path")]
-        [Description("Path to the script file")]
+        [Description("Path to the blaze module file")]
         [Editor(typeof(BlazeFileNameEditor), typeof(UITypeEditor))]
         public string FilePath { get => _scriptPath; set => _scriptPath = value; }
     }

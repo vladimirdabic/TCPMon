@@ -11,7 +11,6 @@ namespace TCPMon
     internal static class Program
     {
         public static ModuleEnv InternalModule;
-        // Utils.CreateLibraries(internal_module);
 
         /// <summary>
         /// The main entry point for the application.
