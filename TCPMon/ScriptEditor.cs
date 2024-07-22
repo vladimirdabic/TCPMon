@@ -157,7 +157,6 @@ event connection.closed() {
                 }
 
                 node.SelectedImageKey = node.ImageKey;
-                // directoryNode.Nodes.Add(node);
             }
 
             directoryNode.Nodes.AddRange(moduleFiles.ToArray());

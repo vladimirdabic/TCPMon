@@ -71,26 +71,20 @@ namespace TCPMon.Connection
 
                     // Load user module
                     ModuleEnv env = _blazeVM.LoadModule(module, _blazeConnectionModule);
+                    _blazeRunning = true;
 
                     // Run main
                     string moduleName = env.Module.Name;
                     var func = env.GetFunction("main");
 
                     if (func is null)
-                    {
                         MainForm.PrintLine($"[{moduleName}] Entry point 'main' not found", Color.Orange);
-                        return;
-                    }
-
-                    _blazeRunning = true;
-                    _blazeVM.RunFunction(func, null);
+                    else
+                        _blazeVM.RunFunction(func, null);
                 }
                 catch (VMException e)
                 {
-                    if (e.Location.line == 0)
-                        MainForm.PrintLine($"[{e.Location.filename}] {e.Value.AsString()}", Color.Orange);
-                    else
-                        MainForm.PrintLine($"[{e.Location.filename}:{e.Location.line}] {e.Value.AsString()}", Color.Orange);
+                    PrintBlazeException(e);
                 }
                 catch (FileLoadException e)
                 {
