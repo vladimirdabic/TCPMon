@@ -218,5 +218,17 @@
   <ItemGroup>
     <None Include="Resources\blaze_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\network_cool_two_pcs-4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editor_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chm-0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings_gear-5.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -28,87 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.connectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.serversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.blazeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.activeConns = new System.Windows.Forms.ToolStripStatusLabel();
             this.connectionPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.consoleBox = new System.Windows.Forms.RichTextBox();
-            this.editorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.newClientStrip = new System.Windows.Forms.ToolStripButton();
+            this.closeConnsStrip = new System.Windows.Forms.ToolStripButton();
+            this.editorStrip = new System.Windows.Forms.ToolStripButton();
+            this.settingsStrip = new System.Windows.Forms.ToolStripButton();
+            this.helpToolstrip = new System.Windows.Forms.ToolStripDropDownButton();
+            this.blazeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectionsToolStripMenuItem,
-            this.serversToolStripMenuItem,
-            this.editorToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(708, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // connectionsToolStripMenuItem
-            // 
-            this.connectionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
-            this.closeAllToolStripMenuItem});
-            this.connectionsToolStripMenuItem.Name = "connectionsToolStripMenuItem";
-            this.connectionsToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.connectionsToolStripMenuItem.Text = "Clients";
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newToolStripMenuItem.Text = "New";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
-            // 
-            // closeAllToolStripMenuItem
-            // 
-            this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
-            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.closeAllToolStripMenuItem.Text = "Close All";
-            this.closeAllToolStripMenuItem.Click += new System.EventHandler(this.closeAllToolStripMenuItem_Click);
-            // 
-            // serversToolStripMenuItem
-            // 
-            this.serversToolStripMenuItem.Enabled = false;
-            this.serversToolStripMenuItem.Name = "serversToolStripMenuItem";
-            this.serversToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.serversToolStripMenuItem.Text = "Servers";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.blazeToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // blazeToolStripMenuItem
-            // 
-            this.blazeToolStripMenuItem.Name = "blazeToolStripMenuItem";
-            this.blazeToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.blazeToolStripMenuItem.Text = "Blaze";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = "About";
             // 
             // statusStrip1
             // 
@@ -148,51 +84,132 @@
             this.consoleBox.Text = "";
             this.consoleBox.WordWrap = false;
             // 
-            // editorToolStripMenuItem
+            // toolStrip1
             // 
-            this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
-            this.editorToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.editorToolStripMenuItem.Text = "Scripts";
-            this.editorToolStripMenuItem.Click += new System.EventHandler(this.editorToolStripMenuItem_Click);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newClientStrip,
+            this.closeConnsStrip,
+            this.toolStripSeparator3,
+            this.editorStrip,
+            this.toolStripSeparator2,
+            this.settingsStrip,
+            this.helpToolstrip});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(708, 25);
+            this.toolStrip1.TabIndex = 7;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // newClientStrip
+            // 
+            this.newClientStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newClientStrip.Image = global::TCPMon.Properties.Resources.network_cool_two_pcs_4;
+            this.newClientStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newClientStrip.Name = "newClientStrip";
+            this.newClientStrip.Size = new System.Drawing.Size(23, 22);
+            this.newClientStrip.ToolTipText = "New Client";
+            this.newClientStrip.Click += new System.EventHandler(this.newClientStrip_Click);
+            // 
+            // closeConnsStrip
+            // 
+            this.closeConnsStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.closeConnsStrip.Image = global::TCPMon.Properties.Resources.disconnect;
+            this.closeConnsStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.closeConnsStrip.Name = "closeConnsStrip";
+            this.closeConnsStrip.Size = new System.Drawing.Size(23, 22);
+            this.closeConnsStrip.ToolTipText = "Close All Connections";
+            this.closeConnsStrip.Click += new System.EventHandler(this.closeConnsStrip_Click);
+            // 
+            // editorStrip
+            // 
+            this.editorStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.editorStrip.Image = global::TCPMon.Properties.Resources.editor_icon;
+            this.editorStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.editorStrip.Name = "editorStrip";
+            this.editorStrip.Size = new System.Drawing.Size(23, 22);
+            this.editorStrip.ToolTipText = "Open Editor";
+            this.editorStrip.Click += new System.EventHandler(this.editorStrip_Click);
+            // 
+            // settingsStrip
+            // 
+            this.settingsStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.settingsStrip.Image = global::TCPMon.Properties.Resources.settings_gear_5;
+            this.settingsStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.settingsStrip.Name = "settingsStrip";
+            this.settingsStrip.Size = new System.Drawing.Size(23, 22);
+            this.settingsStrip.ToolTipText = "Settings";
+            // 
+            // helpToolstrip
+            // 
+            this.helpToolstrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.helpToolstrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.blazeToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.helpToolstrip.Image = global::TCPMon.Properties.Resources.chm_0;
+            this.helpToolstrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpToolstrip.Name = "helpToolstrip";
+            this.helpToolstrip.Size = new System.Drawing.Size(29, 22);
+            // 
+            // blazeToolStripMenuItem
+            // 
+            this.blazeToolStripMenuItem.Name = "blazeToolStripMenuItem";
+            this.blazeToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.blazeToolStripMenuItem.Text = "Blaze";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 523);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.consoleBox);
             this.Controls.Add(this.connectionPanel);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "TCPMon";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem connectionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeAllToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel activeConns;
         private System.Windows.Forms.FlowLayoutPanel connectionPanel;
         private System.Windows.Forms.RichTextBox consoleBox;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton editorStrip;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripDropDownButton helpToolstrip;
+        private System.Windows.Forms.ToolStripButton newClientStrip;
+        private System.Windows.Forms.ToolStripButton closeConnsStrip;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem blazeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem serversToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton settingsStrip;
     }
 }
 

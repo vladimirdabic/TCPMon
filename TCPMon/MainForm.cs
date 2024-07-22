@@ -43,57 +43,6 @@ namespace TCPMon
 
         public static void PrintLine(string message) { PrintLine(message, Color.Black); }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _newForm.StartPosition = FormStartPosition.CenterParent;
-            DialogResult result = _newForm.ShowDialog();
-            if (result != DialogResult.OK) return;
-
-            try
-            {
-                IConnection connection;
-                PrintLine($"[{_newForm.ConnectionName} - {_newForm.Parameters.IPAddress}:{_newForm.Parameters.Port}] Attempting connection...");
-
-                switch(_newForm.ConnectionType)
-                {
-                    case "Basic":
-                        TCPConnection tcpConnection = new TCPConnection(_newForm.ConnectionName);
-                        connection = tcpConnection;
-                        tcpConnection.Connect(_newForm.Parameters.IPAddress, _newForm.Parameters.Port);
-                        break;
-
-                    case "Scripted":
-                        TCPScriptedConnection scriptedConn = new TCPScriptedConnection(_newForm.ConnectionName, ((ScriptedConnectionParameters)_newForm.Parameters).FilePath);
-                        connection = scriptedConn;
-                        scriptedConn.Connect(_newForm.Parameters.IPAddress, _newForm.Parameters.Port);
-                        break;
-
-                    default:
-                        throw new Exception("Unknown connection type");
-                }
-                
-                connection.ConnectionClosed += Connection_ConnectionClosed;
-                connection.PacketReceived += Connection_PacketReceived;
-
-                ConnectionControl control = new ConnectionControl(connection);
-                control.MonitorClicked += Control_MonitorClicked;
-                control.SendDataClicked += Control_SendDataClicked;
-                connectionPanel.Controls.Add(control);
-                _connectionControls.Add(control);
-
-                activeConns.Text = $"Active Connections: {_connectionControls.Count}";
-                PrintLine($"[{connection.Name} - {connection.Address}] Connection established", Color.Green);
-            }
-            catch(ConnectionException ex)
-            {
-                PrintLine($"[{_newForm.ConnectionName} - {_newForm.Parameters.IPAddress}:{_newForm.Parameters.Port}] Connection failed: {ex.Message}", Color.Orange);
-            }
-            catch(FormatException)
-            {
-                PrintLine($"[{_newForm.ConnectionName} - {_newForm.Parameters.IPAddress}:{_newForm.Parameters.Port}] Connection failed: Port must be a number", Color.Orange);
-            }
-        }
-
         private void Connection_PacketReceived(IConnection sender, IPacket packet)
         {
             Action action = () => PrintLine($"[{sender.Name} - {sender.Address}] Received {packet.Data.Length} bytes", Color.Gray);
@@ -140,13 +89,64 @@ namespace TCPMon
             Invoke(action);
         }
 
-        private void closeAllToolStripMenuItem_Click(object sender, EventArgs e)
+        private void newClientStrip_Click(object sender, EventArgs e)
         {
-            foreach(ConnectionControl control in _connectionControls)
+            _newForm.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = _newForm.ShowDialog();
+            if (result != DialogResult.OK) return;
+
+            try
+            {
+                IConnection connection;
+                PrintLine($"[{_newForm.ConnectionName} - {_newForm.Parameters.IPAddress}:{_newForm.Parameters.Port}] Attempting connection...");
+
+                switch (_newForm.ConnectionType)
+                {
+                    case "Basic":
+                        TCPConnection tcpConnection = new TCPConnection(_newForm.ConnectionName);
+                        connection = tcpConnection;
+                        tcpConnection.Connect(_newForm.Parameters.IPAddress, _newForm.Parameters.Port);
+                        break;
+
+                    case "Scripted":
+                        TCPScriptedConnection scriptedConn = new TCPScriptedConnection(_newForm.ConnectionName, ((ScriptedConnectionParameters)_newForm.Parameters).FilePath);
+                        connection = scriptedConn;
+                        scriptedConn.Connect(_newForm.Parameters.IPAddress, _newForm.Parameters.Port);
+                        break;
+
+                    default:
+                        throw new Exception("Unknown connection type");
+                }
+
+                connection.ConnectionClosed += Connection_ConnectionClosed;
+                connection.PacketReceived += Connection_PacketReceived;
+
+                ConnectionControl control = new ConnectionControl(connection);
+                control.MonitorClicked += Control_MonitorClicked;
+                control.SendDataClicked += Control_SendDataClicked;
+                connectionPanel.Controls.Add(control);
+                _connectionControls.Add(control);
+
+                activeConns.Text = $"Active Connections: {_connectionControls.Count}";
+                PrintLine($"[{connection.Name} - {connection.Address}] Connection established", Color.Green);
+            }
+            catch (ConnectionException ex)
+            {
+                PrintLine($"[{_newForm.ConnectionName} - {_newForm.Parameters.IPAddress}:{_newForm.Parameters.Port}] Connection failed: {ex.Message}", Color.Orange);
+            }
+            catch (FormatException)
+            {
+                PrintLine($"[{_newForm.ConnectionName} - {_newForm.Parameters.IPAddress}:{_newForm.Parameters.Port}] Connection failed: Port must be a number", Color.Orange);
+            }
+        }
+
+        private void closeConnsStrip_Click(object sender, EventArgs e)
+        {
+            foreach (ConnectionControl control in _connectionControls)
                 control.Connection.Close();
         }
 
-        private void editorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void editorStrip_Click(object sender, EventArgs e)
         {
             ScriptEditor editorForm = new ScriptEditor();
             editorForm.Show(this);
