@@ -62,7 +62,8 @@ namespace TCPMon
                 packetListPanel.Controls.Add(control);
                 control.HexClicked += Control_HexClicked;
             };
-            Invoke(action);
+            
+            this?.Invoke(action);
         }
 
         private void clearPackets_Click(object sender, EventArgs e)

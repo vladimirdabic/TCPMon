@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using TCPMon.Blaze;
 using VD.Blaze.Interpreter;
 using VD.Blaze.Interpreter.Environment;
+using VD.Blaze.Interpreter.Types;
 using VD.Blaze.Module;
 
 namespace TCPMon.Connection
@@ -153,15 +154,34 @@ namespace TCPMon.Connection
                     _packets.Add(packet);
                     PacketReceived?.Invoke(this, packet);
 
-                    // TODO: Pass list of bytes or a custom object
-                    if(_blazeRunning) _blazeConnection.PacketsEvent.Raise(null);
+                    if (_blazeRunning)
+                    {
+                        try
+                        {
+                            _blazeConnection.PacketsEvent.Raise(new List<IValue> { new PacketValue(packet) });
+                        }
+                        catch (VMException e)
+                        {
+                            PrintBlazeException(e);
+                        }
+                    }
                 }
 
                 if (!_connected || !IsSocketConnected(_client.Client)) _connected = false;
             }
 
 
-            if(_blazeRunning) _blazeConnection.ClosedEvent.Raise(null);
+            if (_blazeRunning)
+            {
+                try
+                {
+                    _blazeConnection.ClosedEvent.Raise(null);
+                }
+                catch (VMException e)
+                {
+                    PrintBlazeException(e);
+                }
+            }
             ConnectionClosed?.Invoke(this);
             _client.Close();
 
@@ -177,6 +197,16 @@ namespace TCPMon.Connection
         {
             if (!_connected) return;
             _stream.Write(data, 0, data.Length);
+        }
+
+        private void PrintBlazeException(VMException e)
+        {
+            if (e.Location.line == 0)
+                MainForm.PrintLine($"[{e.Location.filename}] {e.Value.AsString()}", Color.Orange);
+            else
+                MainForm.PrintLine($"[{e.Location.filename}:{e.Location.line}] {e.Value.AsString()}", Color.Orange);
+
+            _blazeRunning = false;
         }
     }
 }
