@@ -35,6 +35,7 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.blazeModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.binarySchemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveStrip = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.compileStrip = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -75,7 +76,6 @@
             this.fastColoredTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fastColoredTextBox1.IsReplaceMode = false;
             this.fastColoredTextBox1.Location = new System.Drawing.Point(0, 0);
             this.fastColoredTextBox1.Name = "fastColoredTextBox1";
@@ -91,6 +91,7 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton1,
+            this.saveStrip,
             this.toolStripSeparator1,
             this.compileStrip});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -102,29 +103,40 @@
             // 
             // toolStripDropDownButton1
             // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.blazeModuleToolStripMenuItem,
             this.binarySchemaToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.Image = global::TCPMon.Properties.Resources.new_icon;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(44, 22);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
             this.toolStripDropDownButton1.Text = "New";
             // 
             // blazeModuleToolStripMenuItem
             // 
+            this.blazeModuleToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.blazeModuleToolStripMenuItem.Name = "blazeModuleToolStripMenuItem";
-            this.blazeModuleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blazeModuleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.blazeModuleToolStripMenuItem.Text = "Blaze Module";
             this.blazeModuleToolStripMenuItem.Click += new System.EventHandler(this.blazeModuleToolStripMenuItem_Click);
             // 
             // binarySchemaToolStripMenuItem
             // 
             this.binarySchemaToolStripMenuItem.Name = "binarySchemaToolStripMenuItem";
-            this.binarySchemaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.binarySchemaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.binarySchemaToolStripMenuItem.Text = "Binary Schema";
             this.binarySchemaToolStripMenuItem.Click += new System.EventHandler(this.binarySchemaToolStripMenuItem_Click);
+            // 
+            // saveStrip
+            // 
+            this.saveStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveStrip.Image = global::TCPMon.Properties.Resources.save_icon;
+            this.saveStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveStrip.Name = "saveStrip";
+            this.saveStrip.Size = new System.Drawing.Size(23, 22);
+            this.saveStrip.ToolTipText = "Save";
+            this.saveStrip.Click += new System.EventHandler(this.saveStrip_Click);
             // 
             // toolStripSeparator1
             // 
@@ -133,11 +145,11 @@
             // 
             // compileStrip
             // 
-            this.compileStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.compileStrip.Image = ((System.Drawing.Image)(resources.GetObject("compileStrip.Image")));
+            this.compileStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.compileStrip.Image = global::TCPMon.Properties.Resources.build_icon;
             this.compileStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.compileStrip.Name = "compileStrip";
-            this.compileStrip.Size = new System.Drawing.Size(56, 22);
+            this.compileStrip.Size = new System.Drawing.Size(23, 22);
             this.compileStrip.Text = "Compile";
             this.compileStrip.Click += new System.EventHandler(this.compileStrip_Click);
             // 
@@ -260,5 +272,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton saveStrip;
     }
 }

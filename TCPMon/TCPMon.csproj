@@ -206,5 +206,17 @@
   <ItemGroup>
     <None Include="Resources\blaze_file.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\build_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blaze_icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

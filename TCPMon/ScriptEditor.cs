@@ -264,6 +264,11 @@ event connection.closed() {
         {
             base.CenterToParent();
         }
+
+        private void saveStrip_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
     }
 
     public static class TreeViewExtensions
