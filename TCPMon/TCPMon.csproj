@@ -135,6 +135,12 @@
     <Compile Include="SendForm.Designer.cs">
       <DependentUpon>SendForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ConnectionControl.resx">
       <DependentUpon>ConnectionControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -168,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SendForm.resx">
       <DependentUpon>SendForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

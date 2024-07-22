@@ -34,11 +34,11 @@
             this.connectionPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.consoleBox = new System.Windows.Forms.RichTextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.newClientStrip = new System.Windows.Forms.ToolStripButton();
             this.closeConnsStrip = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.editorStrip = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsStrip = new System.Windows.Forms.ToolStripButton();
             this.helpToolstrip = new System.Windows.Forms.ToolStripDropDownButton();
             this.blazeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,16 +102,6 @@
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
             // newClientStrip
             // 
             this.newClientStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -132,6 +122,11 @@
             this.closeConnsStrip.ToolTipText = "Close All Connections";
             this.closeConnsStrip.Click += new System.EventHandler(this.closeConnsStrip_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // editorStrip
             // 
             this.editorStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -142,6 +137,11 @@
             this.editorStrip.ToolTipText = "Open Editor";
             this.editorStrip.Click += new System.EventHandler(this.editorStrip_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // settingsStrip
             // 
             this.settingsStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -150,6 +150,7 @@
             this.settingsStrip.Name = "settingsStrip";
             this.settingsStrip.Size = new System.Drawing.Size(23, 22);
             this.settingsStrip.ToolTipText = "Settings";
+            this.settingsStrip.Click += new System.EventHandler(this.settingsStrip_Click);
             // 
             // helpToolstrip
             // 

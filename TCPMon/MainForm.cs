@@ -15,6 +15,7 @@ namespace TCPMon
     public partial class MainForm : Form
     {
         private readonly NewForm _newForm = new NewForm();
+        private readonly SettingsForm _settingsForm = new SettingsForm();
         private readonly List<ConnectionControl> _connectionControls = new List<ConnectionControl>();
         private static RichTextBox _consoleInstance;
 
@@ -45,6 +46,8 @@ namespace TCPMon
 
         private void Connection_PacketReceived(IConnection sender, IPacket packet)
         {
+            if (!Properties.Settings.Default.ConsoleByteInfo) return;
+            
             Action action = () => PrintLine($"[{sender.Name} - {sender.Address}] Received {packet.Data.Length} bytes", Color.Gray);
             Invoke(action);
         }
@@ -151,6 +154,12 @@ namespace TCPMon
             ScriptEditor editorForm = new ScriptEditor();
             editorForm.Show(this);
             editorForm.CenterToParent();
+        }
+
+        private void settingsStrip_Click(object sender, EventArgs e)
+        {
+            _settingsForm.StartPosition = FormStartPosition.CenterParent;
+            _settingsForm.ShowDialog();
         }
     }
 

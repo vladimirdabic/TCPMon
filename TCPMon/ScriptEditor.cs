@@ -224,19 +224,32 @@ event connection.closed() {
         {
             Save();
 
+            if(!File.Exists(Properties.Settings.Default.BlazePath))
+            {
+                textBox1.Text = "Compiler path not defined";
+                return;
+            }
+
             Process p = new Process();
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.FileName = @"C:\Blaze\blzc.exe";
+            p.StartInfo.FileName = Properties.Settings.Default.BlazePath;
             p.StartInfo.WorkingDirectory = Path.GetDirectoryName(_currentFilePath);
-            p.StartInfo.Arguments = $"-s \"{Path.GetFileName(_currentFilePath)}\" -d -m \"{Path.GetFileNameWithoutExtension(_currentFilePath)}\"";
+
+            string buildParameters = $"-s \"{Path.GetFileName(_currentFilePath)}\" ";
+            if (Properties.Settings.Default.BlazeDebug) buildParameters += "-d ";
+            if (Properties.Settings.Default.BlazeSimplify) buildParameters += $"-m \"{Path.GetFileNameWithoutExtension(_currentFilePath)}\" ";
+
+            p.StartInfo.Arguments = buildParameters;
             p.Start();
+
+            textBox1.Text = $"{Properties.Settings.Default.BlazePath} {buildParameters}\r\n\r\n";
 
             string output = p.StandardOutput.ReadToEnd();
             p.WaitForExit();
 
-            textBox1.Text = output;
+            textBox1.Text += output;
             ListDirectory(treeView1, "scripts");
         }
 
@@ -257,7 +270,6 @@ event connection.closed() {
                 File.Delete(Path.Combine("scripts", _clickedNode.FullPath));
 
             ListDirectory(treeView1, "scripts");
-            //_clickedNode.Remove();
         }
 
         public new void CenterToParent()
