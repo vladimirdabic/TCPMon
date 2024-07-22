@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SendForm));
             this.packetHexBox = new Be.Windows.Forms.HexBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.connStrip = new System.Windows.Forms.ToolStripStatusLabel();
@@ -86,6 +87,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.packetHexBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "SendForm";
             this.Text = "TCPMon - Sender";

@@ -76,6 +76,7 @@
             this.fastColoredTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fastColoredTextBox1.IsReplaceMode = false;
             this.fastColoredTextBox1.Location = new System.Drawing.Point(0, 0);
             this.fastColoredTextBox1.Name = "fastColoredTextBox1";
@@ -117,14 +118,14 @@
             // 
             this.blazeModuleToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.blazeModuleToolStripMenuItem.Name = "blazeModuleToolStripMenuItem";
-            this.blazeModuleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.blazeModuleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.blazeModuleToolStripMenuItem.Text = "Blaze Module";
             this.blazeModuleToolStripMenuItem.Click += new System.EventHandler(this.blazeModuleToolStripMenuItem_Click);
             // 
             // binarySchemaToolStripMenuItem
             // 
             this.binarySchemaToolStripMenuItem.Name = "binarySchemaToolStripMenuItem";
-            this.binarySchemaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.binarySchemaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.binarySchemaToolStripMenuItem.Text = "Binary Schema";
             this.binarySchemaToolStripMenuItem.Click += new System.EventHandler(this.binarySchemaToolStripMenuItem_Click);
             // 
@@ -239,6 +240,7 @@
             this.ClientSize = new System.Drawing.Size(833, 496);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ScriptEditor";
             this.Text = "TCPMon - Editor";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ScriptEditor_KeyDown);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MonitorForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.connStrip = new System.Windows.Forms.ToolStripStatusLabel();
             this.monitorPanel = new TCPMon.MonitorPanel();
@@ -67,6 +68,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.monitorPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MonitorForm";
             this.Text = "TCPMon - Data Monitor";

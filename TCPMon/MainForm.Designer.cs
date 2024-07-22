@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.activeConns = new System.Windows.Forms.ToolStripStatusLabel();
             this.connectionPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -183,6 +184,7 @@
             this.Controls.Add(this.connectionPanel);
             this.Controls.Add(this.statusStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "TCPMon";

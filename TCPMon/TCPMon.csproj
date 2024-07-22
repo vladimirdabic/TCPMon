@@ -47,6 +47,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>monitor_black.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Be.Windows.Forms.HexBox">
       <HintPath>..\..\..\..\Desktop\DLLS\Be.Windows.Forms.HexBox.dll</HintPath>
@@ -229,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\settings_gear-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="monitor_black.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
