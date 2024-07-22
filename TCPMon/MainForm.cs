@@ -23,6 +23,8 @@ namespace TCPMon
         {
             InitializeComponent();
             _consoleInstance = consoleBox;
+
+            new SchemaTester().Show();
         }
 
         public static void PrintLine(string message, Color color)
