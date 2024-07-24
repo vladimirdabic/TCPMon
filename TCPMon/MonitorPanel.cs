@@ -5,24 +5,33 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCPMon.Connection;
+using VD.BinarySchema;
+using VD.BinarySchema.Parse;
 
 namespace TCPMon
 {
     public partial class MonitorPanel : UserControl
     {
-        public IConnection Connection { get; set; }
+        public IConnection Connection { get; private set; }
+        public Statement CurrentSchema { get; set; }
+        public string CurrentSchemaName { get; set; }
+
+        private SchemaDecoder _decoder;
+        private TreeSchema _treeSchema;
 
         public MonitorPanel()
         {
             InitializeComponent();
-            Connection = null;  
 
-            packetListPanel.VerticalScroll.Visible = true;
+            Connection = null;
+            _decoder = new SchemaDecoder();
+            _treeSchema = new TreeSchema(schemaTree);
         }
 
         public void SetConnection(IConnection connection)
@@ -51,7 +60,21 @@ namespace TCPMon
 
         private void Control_HexClicked(object sender, EventArgs e)
         {
-            packetHexBox.ByteProvider = new DynamicByteProvider(((PacketControl)sender).Data);
+            byte[] data = ((PacketControl)sender).Data;
+            packetHexBox.ByteProvider = new DynamicByteProvider(data);
+
+            if (CurrentSchema is null) return;
+
+            try
+            {
+                BinaryReader reader = new BinaryReader(new MemoryStream(data));
+                SchemaObject obj = _decoder.Decode(reader, CurrentSchema, CurrentSchemaName);
+                _treeSchema.LoadSchema(obj);
+            }
+            catch (DecoderException ex)
+            {
+                MessageBox.Show($"[{ex.Source}:{ex.Line}] {ex.Message}", "Schema error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void Connection_PacketReceived(IConnection sender, IPacket packet)

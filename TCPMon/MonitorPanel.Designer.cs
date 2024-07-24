@@ -29,11 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MonitorPanel));
             this.packetListPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.packetHexBox = new Be.Windows.Forms.HexBox();
-            this.clearPackets = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.clearPackets = new System.Windows.Forms.Button();
+            this.schemaTree = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // packetListPanel
@@ -83,16 +86,38 @@
             this.clearPackets.UseVisualStyleBackColor = true;
             this.clearPackets.Click += new System.EventHandler(this.clearPackets_Click);
             // 
+            // schemaTree
+            // 
+            this.schemaTree.ImageIndex = 0;
+            this.schemaTree.ImageList = this.imageList1;
+            this.schemaTree.Location = new System.Drawing.Point(853, 3);
+            this.schemaTree.Name = "schemaTree";
+            this.schemaTree.SelectedImageIndex = 0;
+            this.schemaTree.Size = new System.Drawing.Size(181, 465);
+            this.schemaTree.TabIndex = 11;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "bool");
+            this.imageList1.Images.SetKeyName(1, "string");
+            this.imageList1.Images.SetKeyName(2, "array");
+            this.imageList1.Images.SetKeyName(3, "char");
+            this.imageList1.Images.SetKeyName(4, "int");
+            this.imageList1.Images.SetKeyName(5, "struct");
+            // 
             // MonitorPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.schemaTree);
             this.Controls.Add(this.clearPackets);
             this.Controls.Add(this.packetListPanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.packetHexBox);
             this.Name = "MonitorPanel";
-            this.Size = new System.Drawing.Size(851, 471);
+            this.Size = new System.Drawing.Size(1040, 471);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,5 +130,7 @@
         private Be.Windows.Forms.HexBox packetHexBox;
         private System.Windows.Forms.Button clearPackets;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TreeView schemaTree;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

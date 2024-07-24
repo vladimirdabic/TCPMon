@@ -63,6 +63,16 @@ namespace TCPMon.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap binary {
+            get {
+                object obj = ResourceManager.GetObject("binary", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap blaze_file {
             get {
                 object obj = ResourceManager.GetObject("blaze_file", resourceCulture);

@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Decoder\DecodedValue.cs" />
     <Compile Include="Decoder\Decoder.cs" />
+    <Compile Include="Decoder\SchemaObject.cs" />
     <Compile Include="Lexer\Lexer.cs" />
     <Compile Include="Lexer\Token.cs" />
     <Compile Include="Parser\Member.cs" />

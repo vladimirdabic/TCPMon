@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VD.BinarySchema;
+using VD.BinarySchema.Parse;
 
 namespace TCPMon
 {
@@ -25,9 +27,20 @@ namespace TCPMon
         {
             try
             {
-                var obj = SchemaDecoder.Decode(((DynamicByteProvider)packetHexBox.ByteProvider).Bytes.ToArray(), fastColoredTextBox1.Text);
-                PrintDict(obj);
+                byte[] data = ((DynamicByteProvider)packetHexBox.ByteProvider).Bytes.ToArray();
 
+                Lexer lexer = new Lexer();
+                Parser parser = new Parser();
+                TreeSchema treeSchema = new TreeSchema(treeView1);
+                SchemaDecoder decoder = new SchemaDecoder();
+
+                var tokens = lexer.Lex(fastColoredTextBox1.Text, "<internal>");
+                var defs = parser.Parse(tokens);
+
+                BinaryReader reader = new BinaryReader(new MemoryStream(data));
+                SchemaObject obj = decoder.Decode(reader, defs, "<internal>");
+
+                treeSchema.LoadSchema(obj);
             }
             catch(LexerException ex)
             {
@@ -40,17 +53,6 @@ namespace TCPMon
             catch(DecoderException ex)
             {
                 Console.WriteLine($"[{ex.Source}:{ex.Line}] {ex.Message}");
-            }
-        }
-
-        private void PrintDict(Dictionary<string, object> dict, int level = 0)
-        {
-            foreach (var entry in dict)
-            {
-                if (entry.Value is Dictionary<string, object> subDict)
-                    PrintDict(subDict, level + 1);
-                else
-                    Console.WriteLine(new string(' ', level * 4) + entry.Key + ": " + entry.Value);
             }
         }
     }

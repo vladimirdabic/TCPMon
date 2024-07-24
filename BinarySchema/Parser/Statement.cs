@@ -13,11 +13,11 @@ namespace VD.BinarySchema.Parse
 
         public interface IVisitor
         {
-            void Visit(Definitions definitions);
-            void Visit(Struct structStatement);
+            SchemaObject Visit(Definitions definitions);
+            SchemaObject Visit(Struct structStatement);
         }
 
-        public abstract void Accept(IVisitor visitor);
+        public abstract SchemaObject Accept(IVisitor visitor);
 
 
         public class Definitions : Statement
@@ -29,9 +29,9 @@ namespace VD.BinarySchema.Parse
                 Statements = statements;
             }
 
-            public override void Accept(IVisitor visitor)
+            public override SchemaObject Accept(IVisitor visitor)
             {
-                visitor.Visit(this);
+                return visitor.Visit(this);
             }
         }
 
@@ -46,9 +46,9 @@ namespace VD.BinarySchema.Parse
                 Name = name;
             }
 
-            public override void Accept(IVisitor visitor)
+            public override SchemaObject Accept(IVisitor visitor)
             {
-                visitor.Visit(this);
+                return visitor.Visit(this);
             }
         }
     }

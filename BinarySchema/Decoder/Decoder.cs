@@ -1,11 +1,15 @@
-﻿using System;
+﻿using VD.BinarySchema;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using VD.BinarySchema.Parse;
+using System.Xml.Linq;
 
 
 namespace VD.BinarySchema
@@ -13,57 +17,40 @@ namespace VD.BinarySchema
     public class SchemaDecoder : Statement.IVisitor, Member.IVisitor
     {
         private BinaryReader _reader;
-        private Dictionary<string, object> _decodedObject;
-        private Dictionary<string, Statement.Struct> _structs;
+        internal SchemaObject _currentObject;
+        internal Statement.Struct _currentStruct;
 
         private string _source;
         private int _line;
 
-        public static Dictionary<string, object> Decode(byte[] data, string schema, string source = "Decoder.Decode")
-        {
-            Lexer lexer = new Lexer();
-            Parser parser = new Parser();
-            SchemaDecoder decoder = new SchemaDecoder();
-
-            var tokens = lexer.Lex(schema, source);
-            var defs = parser.Parse(tokens);
-
-            BinaryReader reader = new BinaryReader(new MemoryStream(data));
-            return decoder.Decode(reader, defs, source);
-        }
-
-        public Dictionary<string, object> Decode(BinaryReader reader, Statement definitions, string source)
+        public SchemaObject Decode(BinaryReader reader, Statement definitions, string source)
         {
             _reader = reader;
             _source = source;
-            _decodedObject = new Dictionary<string, object>();
-            _structs = new Dictionary<string, Statement.Struct>();
-            Evaluate(definitions);
-            return _decodedObject;
+            return Evaluate(definitions);
         }
 
-        public void Evaluate(Statement statement)
+        public SchemaObject Evaluate(Statement statement)
         {
             if (statement.Line != 0)
             {
                 _line = statement.Line;
-                // statement.CurrentLine = _line;
             }
 
-            statement.Accept(this);
+            return statement.Accept(this);
         }
 
-        public void Evaluate(Member member)
+        public void Evaluate(SchemaObject obj, Member member)
         {
             if (member.Line != 0)
             {
                 _line = member.Line;
             }
 
-            member.Accept(this);
+            member.Accept(obj, this);
         }
 
-        public void Visit(Statement.Definitions definitions)
+        public SchemaObject Visit(Statement.Definitions definitions)
         {
             Statement.Struct entry = null;
 
@@ -72,46 +59,47 @@ namespace VD.BinarySchema
             {
                 if (def is Statement.Struct structStmt)
                 {
-                    _structs[(string)structStmt.Name.Value] = structStmt;
                     if (structStmt.Properties != null && structStmt.Properties.ContainsKey("entry")) entry = structStmt;
                 }
             }
 
             if(entry is null)
-                throw new DecoderException(_source, _line, "Entry struct not found, please define one usind '@entry'");
+                Error("Entry struct not found, please define one usind '@entry'");
 
-            Evaluate(entry);
+            return Evaluate(entry);
         }
 
-        public void Visit(Statement.Struct structStatement)
+        public SchemaObject Visit(Statement.Struct structStatement)
         {
+            SchemaObject obj = new SchemaObject();
+
+            var oldObj = _currentObject;
+            var oldStruct = _currentStruct;
+            _currentObject = obj;
+            _currentStruct = structStatement;
+
             foreach (Member member in structStatement.Members)
-                Evaluate(member);
+                Evaluate(obj, member);
+
+            _currentStruct = oldStruct;
+            _currentObject = oldObj;
+            return obj;
         }
 
-        public void Visit(Member.Simple simpleMember)
+        public void Visit(SchemaObject obj, Member.Simple simpleMember)
         {
             string name = (string)simpleMember.Name.Value;
-
-            if (simpleMember.Type is StructType)
-            {
-                var originalStruct = _decodedObject;
-                _decodedObject = new Dictionary<string, object>();
-                
-                simpleMember.Type.Decode(_reader, this);
-
-                originalStruct[name] = _decodedObject;
-                _decodedObject = originalStruct;
-                
-                return;
-            }
-
             object value = simpleMember.Type.Decode(_reader, this);
 
             if(value is null)
-                throw new DecoderException(_source, _line, $"Failed to decode member '{name}'");
+                Error($"Failed to decode member '{name}' in struct '{_currentStruct.Name.Value}'");
 
-            _decodedObject[name] = value;
+            obj[name] = new DecodedValue(simpleMember.Type, value);
+        }
+
+        public void Error(string message)
+        {
+            throw new DecoderException(_source, _line, message);
         }
     }
 

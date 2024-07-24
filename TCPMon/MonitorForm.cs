@@ -1,14 +1,19 @@
-﻿using System;
+﻿using Be.Windows.Forms;
+using FastColoredTextBoxNS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCPMon.Connection;
+using VD.BinarySchema;
+using VD.BinarySchema.Parse;
 
 namespace TCPMon
 {
@@ -46,6 +51,43 @@ namespace TCPMon
         public new void CenterToParent()
         {
             base.CenterToParent();
+        }
+
+        private void schemaButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog()
+            {
+                Filter = "Schema files|*.schema",
+            };
+
+            fileDialog.InitialDirectory = Path.Combine(Directory.GetCurrentDirectory(), "scripts");
+            fileDialog.RestoreDirectory = true;
+
+            if (fileDialog.ShowDialog() != DialogResult.OK) return;
+
+            try
+            {
+                string schema = File.ReadAllText(fileDialog.FileName);
+                string name = Path.GetFileName(fileDialog.FileName);
+
+                Lexer lexer = new Lexer();
+                Parser parser = new Parser();
+
+                var tokens = lexer.Lex(schema, name);
+                var defs = parser.Parse(tokens);
+
+                schemaStatus.Text = $"Current Schema: {name}";
+                monitorPanel.CurrentSchema = defs;
+                monitorPanel.CurrentSchemaName = name;
+            }
+            catch (LexerException ex)
+            {
+                MessageBox.Show($"[{ex.Source}:{ex.Line}] {ex.Message}", "Schema error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (ParserException ex)
+            {
+                MessageBox.Show($"[{ex.Source}:{ex.Line}] {ex.Message}", "Schema error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

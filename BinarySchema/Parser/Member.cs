@@ -14,10 +14,10 @@ namespace VD.BinarySchema.Parse
 
         public interface IVisitor
         {
-            void Visit(Simple simpleMember);
+            void Visit(SchemaObject obj, Simple simpleMember);
         }
 
-        public abstract void Accept(IVisitor visitor);
+        public abstract void Accept(SchemaObject obj, IVisitor visitor);
 
         public class Simple : Member
         {
@@ -27,9 +27,9 @@ namespace VD.BinarySchema.Parse
                 Type = type;
             }
 
-            public override void Accept(IVisitor visitor)
+            public override void Accept(SchemaObject obj, IVisitor visitor)
             {
-                visitor.Visit(this);
+                visitor.Visit(obj, this);
             }
         }
     }

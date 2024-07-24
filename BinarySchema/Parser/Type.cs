@@ -16,7 +16,7 @@ namespace VD.BinarySchema.Parse
 
     public class IntegerType : IType
     {
-        public string Name => IntSize.ToString();
+        public string Name => IntSize.ToString().ToLower();
         public Size IntSize { get; private set; }
 
 
@@ -53,11 +53,32 @@ namespace VD.BinarySchema.Parse
 
     public class BoolType : IType
     {
-        public string Name => "Bool";
+        public string Name => "bool";
 
         public object Decode(BinaryReader reader, SchemaDecoder decoder)
         {
             return reader.ReadBoolean();
+        }
+    }
+
+    public class CharType : IType
+    {
+        public string Name => "char";
+
+        public object Decode(BinaryReader reader, SchemaDecoder decoder)
+        {
+            return reader.ReadChar();
+        }
+    }
+
+    public class StringType : IType
+    {
+        public string Name => "string";
+
+        public object Decode(BinaryReader reader, SchemaDecoder decoder)
+        {
+            int len = reader.ReadUInt16();
+            return new string(reader.ReadChars(len));
         }
     }
 
@@ -73,8 +94,59 @@ namespace VD.BinarySchema.Parse
 
         public object Decode(BinaryReader reader, SchemaDecoder decoder)
         {
-            decoder.Evaluate(Struct);
-            return null;
+            return decoder.Evaluate(Struct);
+        }
+    }
+
+    public class ArrayType : IType
+    {
+        public IType BaseType { get; private set; }
+        public int Size { get; private set; }
+        public string MemberName { get; private set; }
+
+
+        public string Name => $"{BaseType.Name}[]";
+
+        private ArrayType(IType baseType, int size, string memberName)
+        {
+            BaseType = baseType;
+            Size = size;
+            MemberName = memberName;
+        }
+
+        public ArrayType(IType baseType, int size) : this(baseType, size, null)
+        {
+        }
+
+        public ArrayType(IType baseType, string memberName) : this(baseType, 0, memberName)
+        {
+        }
+
+        public object Decode(BinaryReader reader, SchemaDecoder decoder)
+        {
+            int size;
+
+            if(MemberName != null)
+            {
+                if (!decoder._currentObject.ContainsKey(MemberName))
+                    decoder.Error($"Member '{MemberName}' that specifies the array length was not found");
+
+                DecodedValue value = decoder._currentObject[MemberName];
+
+                if (!(value.Type is IntegerType))
+                    decoder.Error($"Member '{MemberName}' that specifies the array length must be an integer type");
+
+                size = Convert.ToInt32(value.Value);
+            }
+            else
+                size = Size;
+
+            DecodedValue[] array = new DecodedValue[size];
+
+            for(int i = 0; i < size; ++i)
+                array[i] = new DecodedValue(BaseType, BaseType.Decode(reader, decoder));
+
+            return array;
         }
     }
 }

@@ -147,6 +147,7 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TreeSchema.cs" />
     <EmbeddedResource Include="ConnectionControl.resx">
       <DependentUpon>ConnectionControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -253,6 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="monitor_black.ico" />
+    <None Include="Resources\binary.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BinarySchema\BinarySchema.csproj">

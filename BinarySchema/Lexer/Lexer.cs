@@ -72,6 +72,24 @@ namespace VD.BinarySchema
                 case '|': _tokens.Add(new Token(Match('|') ? TokenType.OR: TokenType.PIPE, _line, _context)); break;
                 case '&': _tokens.Add(new Token(Match('&') ? TokenType.AND: TokenType.AMPERSAND, _line, _context)); break;
 
+                case '/':
+                    if (Match('/'))
+                    {
+                        while (Available())
+                            if (Match('\n'))
+                            {
+                                _line++;
+                                break;
+                            }
+                            else
+                                _current++;
+                    }
+                    else
+                    {
+                        throw new LexerException(_context, _line, $"Unexpected character '{c}'");
+                    }
+                    break;
+
                 case '\n':
                     _line++;
                     break;

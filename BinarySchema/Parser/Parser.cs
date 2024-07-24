@@ -28,6 +28,9 @@ namespace VD.BinarySchema
                 {"uint64", new IntegerType(IntegerType.Size.UINT64) },
 
                 {"bool", new BoolType() },
+                {"char", new CharType() },
+
+                {"string", new StringType() },
             };
         }
 
@@ -118,7 +121,30 @@ namespace VD.BinarySchema
             if(!_types.ContainsKey(name))
                 throw new ParserException(Peek().Location.Source, Peek().Location.Line, "Expected type");
 
-            return _types[name];
+            IType type = _types[name];
+
+            // Array type
+            if(Match(TokenType.OPEN_SQUARE))
+            {
+                if(Match(TokenType.IDENTIFIER))
+                {
+                    Token member = Prev();
+                    type = new ArrayType(type, (string)member.Value);
+                }
+                else if(Match(TokenType.NUMBER))
+                {
+                    Token len = Prev();
+                    type = new ArrayType(type, (int)len.Value);
+                }
+                else
+                {
+                    throw new ParserException(Peek().Location.Source, Peek().Location.Line, "Expected array size");
+                }
+
+                Consume(TokenType.CLOSE_SQUARE, "Expected ']' after array length");
+            }
+
+            return type;
         }
 
         // Helper functions

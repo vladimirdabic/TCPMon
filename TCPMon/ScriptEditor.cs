@@ -25,6 +25,7 @@ namespace TCPMon
         readonly Style BoldStyle = new TextStyle(null, null, FontStyle.Bold);
         readonly Style BrownStyle = new TextStyle(Brushes.Brown, null, FontStyle.Italic);
         readonly Style DodgerBlueStyle = new TextStyle(Brushes.DodgerBlue, null, FontStyle.Regular);
+        readonly Style MaroonStyle = new TextStyle(Brushes.Maroon, null, FontStyle.Regular);
 
         private string _currentFileExt;
         private string _currentFilePath;
@@ -45,11 +46,12 @@ namespace TCPMon
 
         private void fastColoredTextBox1_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
         {
-            e.ChangedRange.ClearStyle(GreenStyle, KeywordStyle, ItalicControlStyle, ControlStyle, BoldStyle, BrownStyle, DodgerBlueStyle);
+            e.ChangedRange.ClearStyle(GreenStyle, KeywordStyle, ItalicControlStyle, ControlStyle, BoldStyle, BrownStyle, DodgerBlueStyle, MaroonStyle);
             e.ChangedRange.ClearFoldingMarkers();
 
             e.ChangedRange.SetStyle(GreenStyle, @"//.*$", RegexOptions.Multiline);
             e.ChangedRange.SetStyle(BrownStyle, @"""""|''|"".*?[^\\]""|'.*?[^\\]'");
+            e.ChangedRange.SetStyle(MaroonStyle, @"\b\d+[\.]?\d*([eE]\-?\d+)?[lLdDfF]?\b|\b0x[a-fA-F\d]+\b");
 
             if(_currentFileExt == ".blz")
             {
@@ -58,10 +60,13 @@ namespace TCPMon
                 e.ChangedRange.SetStyle(BoldStyle, @"\b(class)\s+(?<range>[\w_]+?)\b");
                 e.ChangedRange.SetStyle(ItalicControlStyle, @"\b(?<range>iter)\s+([\w_]+?)\b");
             }
-            else if(_currentFileExt == ".bsm")
+            else if(_currentFileExt == ".schema")
             {
                 e.ChangedRange.SetStyle(KeywordStyle, @"\b(struct|enum)\b");
-                e.ChangedRange.SetStyle(DodgerBlueStyle, @"\b(uint8|uint16|uint32|int8|int16|int32|string)\b");
+                e.ChangedRange.SetStyle(BoldStyle, @"\b(struct|enum)\s+(?<range>[\w_]+?)\b");
+                e.ChangedRange.SetStyle(DodgerBlueStyle, @"\b([\w_]+?)\s+::\s+(?<range>[\w_]+?)\b");
+                e.ChangedRange.SetStyle(ItalicControlStyle, @"(?<range>@[\w_]+?)\b");
+                e.ChangedRange.SetStyle(ControlStyle, @"\b(if|until|included)\b");
             }
 
             e.ChangedRange.SetFoldingMarkers("{", "}");
@@ -95,13 +100,14 @@ event connection.closed() {
 
         private void binarySchemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fastColoredTextBox1.Text = @"struct Main {
+            fastColoredTextBox1.Text = @"@entry
+struct main {
 
 }
 
 ";
 
-            _currentFileExt = ".bsm";
+            _currentFileExt = ".schema";
             _currentFilePath = null;
             fastColoredTextBox1.OnTextChanged(0, fastColoredTextBox1.LinesCount - 1);
         }
@@ -149,8 +155,8 @@ event connection.closed() {
                         moduleFiles.Add(node);
                         break;
 
-                    case ".bsm":
-                        node.ImageKey = "generic_file";
+                    case ".schema":
+                        node.ImageKey = "schema_file";
                         files.Add(node);
                         break;
 
