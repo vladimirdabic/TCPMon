@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace VD.BinarySchema.Parse
 {
     public interface IType
@@ -85,9 +86,9 @@ namespace VD.BinarySchema.Parse
     public class StructType : IType
     {
         public string Name => (string)Struct.Name.Value;
-        public Statement.Struct Struct { get; private set; }
+        public Definition.Struct Struct { get; private set; }
 
-        public StructType(Statement.Struct structStmt)
+        public StructType(Definition.Struct structStmt)
         {
             Struct = structStmt;
         }
@@ -95,6 +96,34 @@ namespace VD.BinarySchema.Parse
         public object Decode(BinaryReader reader, SchemaDecoder decoder)
         {
             return decoder.Evaluate(Struct);
+        }
+    }
+
+    public class EnumType : IType
+    {
+        public string Name => (string)Enum.Name.Value;
+
+        public Definition.Enum Enum { get; private set; }
+        public IType BaseType { get => Enum.BaseType; }
+
+        public EnumType(Definition.Enum enumDef)
+        {
+            Enum = enumDef;
+        }
+
+        public object Decode(BinaryReader reader, SchemaDecoder decoder)
+        {
+            object value = BaseType.Decode(reader, decoder);
+
+            if (!ObjectExtensions.IsNumber(value)) decoder.Error($"Enum base value can only be an integer type (enum {Name} :: {BaseType.Name})");
+            long num = Convert.ToInt64(value);
+
+            foreach(var pair in  Enum.Values)
+            {
+                if (pair.value == num) return pair.name;                                
+            }
+
+            return $"UNKNOWN ({num})";
         }
     }
 

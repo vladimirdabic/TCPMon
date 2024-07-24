@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,10 +48,11 @@
     <Compile Include="Decoder\SchemaObject.cs" />
     <Compile Include="Lexer\Lexer.cs" />
     <Compile Include="Lexer\Token.cs" />
-    <Compile Include="Parser\Member.cs" />
-    <Compile Include="Parser\Parser.cs" />
-    <Compile Include="Parser\Type.cs" />
-    <Compile Include="Parser\Statement.cs" />
+    <Compile Include="Parse\Expression.cs" />
+    <Compile Include="Parse\Member.cs" />
+    <Compile Include="Parse\Parser.cs" />
+    <Compile Include="Parse\Type.cs" />
+    <Compile Include="Parse\Definition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,27 +6,28 @@ using System.Threading.Tasks;
 
 namespace VD.BinarySchema.Parse
 {
-    public abstract class Statement
+    public abstract class Definition
     {
         public int Line;
         public Dictionary<string, object> Properties;
 
         public interface IVisitor
         {
-            SchemaObject Visit(Definitions definitions);
+            SchemaObject Visit(Collection definitions);
             SchemaObject Visit(Struct structStatement);
+            SchemaObject Visit(Enum enumStatement);
         }
 
         public abstract SchemaObject Accept(IVisitor visitor);
 
 
-        public class Definitions : Statement
+        public class Collection : Definition
         {
-            public List<Statement> Statements;
+            public List<Definition> Definitions;
 
-            public Definitions(List<Statement> statements)
+            public Collection(List<Definition> statements)
             {
-                Statements = statements;
+                Definitions = statements;
             }
 
             public override SchemaObject Accept(IVisitor visitor)
@@ -35,7 +36,7 @@ namespace VD.BinarySchema.Parse
             }
         }
 
-        public class Struct : Statement
+        public class Struct : Definition
         {
             public List<Member> Members;
             public Token Name { get; private set; }
@@ -44,6 +45,25 @@ namespace VD.BinarySchema.Parse
             {
                 Members = members;
                 Name = name;
+            }
+
+            public override SchemaObject Accept(IVisitor visitor)
+            {
+                return visitor.Visit(this);
+            }
+        }
+
+        public class Enum : Definition
+        {
+            public Token Name { get; private set; }
+            public IType BaseType { get; private set; }
+            public List<(long value, string name)> Values { get; private set; }
+
+            public Enum(Token name, List<(long, string)> values, IType baseType)
+            {
+                Name = name;
+                Values = values;
+                BaseType = baseType;
             }
 
             public override SchemaObject Accept(IVisitor visitor)

@@ -66,7 +66,7 @@ namespace TCPMon
                 e.ChangedRange.SetStyle(BoldStyle, @"\b(struct|enum)\s+(?<range>[\w_]+?)\b");
                 e.ChangedRange.SetStyle(DodgerBlueStyle, @"\b([\w_]+?)\s+::\s+(?<range>[\w_]+?)\b");
                 e.ChangedRange.SetStyle(ItalicControlStyle, @"(?<range>@[\w_]+?)\b");
-                e.ChangedRange.SetStyle(ControlStyle, @"\b(if|until|included)\b");
+                e.ChangedRange.SetStyle(ControlStyle, @"\b(if|else|until|included)\b");
             }
 
             e.ChangedRange.SetFoldingMarkers("{", "}");

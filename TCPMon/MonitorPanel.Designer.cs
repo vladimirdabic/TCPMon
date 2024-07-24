@@ -106,6 +106,7 @@
             this.imageList1.Images.SetKeyName(3, "char");
             this.imageList1.Images.SetKeyName(4, "int");
             this.imageList1.Images.SetKeyName(5, "struct");
+            this.imageList1.Images.SetKeyName(6, "enum");
             // 
             // MonitorPanel
             // 

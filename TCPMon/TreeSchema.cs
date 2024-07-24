@@ -74,6 +74,7 @@ namespace TCPMon
             sb.Append($" :: {value.Value}");
 
             string key = value.Type is IntegerType ? "int" : value.Type.Name;
+            if (value.Type is EnumType) key = "enum";
 
             TreeNode node = new TreeNode(sb.ToString())
             {

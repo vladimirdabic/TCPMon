@@ -60,7 +60,7 @@ namespace VD.BinarySchema
         IDENTIFIER,
 
         // Reserved words
-        STRUCT, ENUM, REPEATED, UNTIL, INCLUDED, IF,
+        STRUCT, ENUM, REPEATED, UNTIL, INCLUDED, IF, ELSE, TRUE, FALSE,
 
         // End of file
         EOF

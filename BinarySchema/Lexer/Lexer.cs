@@ -20,6 +20,9 @@ namespace VD.BinarySchema
             { "until", TokenType.UNTIL },
             { "included", TokenType.INCLUDED },
             { "if", TokenType.IF },
+            { "else", TokenType.ELSE },
+            { "true", TokenType.TRUE },
+            { "false", TokenType.FALSE },
         };
 
         /// <summary>

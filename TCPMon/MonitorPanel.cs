@@ -19,7 +19,7 @@ namespace TCPMon
     public partial class MonitorPanel : UserControl
     {
         public IConnection Connection { get; private set; }
-        public Statement CurrentSchema { get; set; }
+        public Definition CurrentSchema { get; set; }
         public string CurrentSchemaName { get; set; }
 
         private SchemaDecoder _decoder;
