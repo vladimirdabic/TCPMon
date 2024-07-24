@@ -56,7 +56,7 @@ namespace TCPMon
             if(_currentFileExt == ".blz")
             {
                 e.ChangedRange.SetStyle(KeywordStyle, @"\b(class|func|event|static|extern|var|new|private|public)\b");
-                e.ChangedRange.SetStyle(ControlStyle, @"\b(return|for|while|if|break|continue|throw|try|catch)\b");
+                e.ChangedRange.SetStyle(ControlStyle, @"\b(return|for|while|if|else|break|continue|throw|try|catch)\b");
                 e.ChangedRange.SetStyle(BoldStyle, @"\b(class)\s+(?<range>[\w_]+?)\b");
                 e.ChangedRange.SetStyle(ItalicControlStyle, @"\b(?<range>iter)\s+([\w_]+?)\b");
             }
@@ -137,7 +137,8 @@ struct main {
                 directoryNode.Nodes.Add(CreateDirectoryNode(directory));
 
             List<TreeNode> moduleFiles = new List<TreeNode>();
-            List<TreeNode> files = new List<TreeNode>();
+            List<TreeNode> blzFiles = new List<TreeNode>();
+            List<TreeNode> schemaFiles = new List<TreeNode>();
 
             foreach (var file in directoryInfo.GetFiles())
             {
@@ -147,7 +148,7 @@ struct main {
                 {
                     case ".blz":
                         node.ImageKey = "blaze_file";
-                        files.Add(node);
+                        blzFiles.Add(node);
                         break;
 
                     case ".blzm":
@@ -157,7 +158,7 @@ struct main {
 
                     case ".schema":
                         node.ImageKey = "schema_file";
-                        files.Add(node);
+                        schemaFiles.Add(node);
                         break;
 
                     default:
@@ -168,7 +169,8 @@ struct main {
             }
 
             directoryNode.Nodes.AddRange(moduleFiles.ToArray());
-            directoryNode.Nodes.AddRange(files.ToArray());
+            directoryNode.Nodes.AddRange(blzFiles.ToArray());
+            directoryNode.Nodes.AddRange(schemaFiles.ToArray());
 
             return directoryNode;
         }

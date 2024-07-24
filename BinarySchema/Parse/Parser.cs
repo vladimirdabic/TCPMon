@@ -270,7 +270,7 @@ namespace VD.BinarySchema
 
                     foreach (var v in values)
                         if (v.name == (string)valueName.Value)
-                            return new Expression.Number((int)v.value);
+                            return new Expression.String(v.name);
 
                     throw new ParserException(Peek().Location.Source, Peek().Location.Line, $"Unknown enum value '{valueName.Value}' in enum '{namestr}'");
                 }

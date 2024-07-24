@@ -11,6 +11,7 @@ namespace VD.BinarySchema.Parse
         public interface IVisitor
         {
             object Visit(Number number);
+            object Visit(String str);
             object Visit(Boolean boolean);
             object Visit(Variable variable);
             object Visit(BinaryOperation binaryOperation);
@@ -23,6 +24,21 @@ namespace VD.BinarySchema.Parse
             public int Value;
 
             public Number(int value)
+            {
+                Value = value;
+            }
+
+            public override object Accept(IVisitor visitor)
+            {
+                return visitor.Visit(this);
+            }
+        }
+
+        public class String : Expression
+        {
+            public string Value;
+
+            public String(string value)
             {
                 Value = value;
             }

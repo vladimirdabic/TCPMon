@@ -79,6 +79,7 @@
     <Compile Include="Blaze\Library.cs" />
     <Compile Include="Blaze\ModuleValue.cs" />
     <Compile Include="Blaze\PacketValue.cs" />
+    <Compile Include="Blaze\SchemaValue.cs" />
     <Compile Include="Blaze\Utils.cs" />
     <Compile Include="ConnectionControl.cs">
       <SubType>UserControl</SubType>

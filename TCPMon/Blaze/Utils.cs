@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using VD.BinarySchema;
 using VD.Blaze.Interpreter;
 using VD.Blaze.Interpreter.Environment;
 using VD.Blaze.Interpreter.Types;
@@ -95,6 +97,44 @@ namespace TCPMon.Blaze
                 catch (IOException)
                 {
                     return null;
+                }
+            });
+
+            // Schema library
+            Library schema_library = new Library("schema");
+            env.DefineVariable("schema", VariableType.PUBLIC, schema_library);
+
+            schema_library.DefineFunction("load", (VM vm, List<IValue> args) =>
+            {
+                if (args.Count == 0 || !(args[0] is StringValue))
+                    throw new InterpreterInternalException("Expected schema file name for function schema.load");
+
+                var schema_path = Path.Combine("scripts", ((StringValue)args[0]).Value);
+
+                try
+                {
+                    string schema = File.ReadAllText(schema_path);
+                    string name = Path.GetFileName(schema_path);
+
+                    Lexer lexer = new Lexer();
+                    Parser parser = new Parser();
+
+                    var tokens = lexer.Lex(schema, name);
+                    var defs = parser.Parse(tokens);
+
+                    return new SchemaValue(defs, name);
+                }
+                catch (LexerException ex)
+                {
+                    throw new InterpreterInternalException($"[{ex.Source}:{ex.Line}] {ex.Message}");
+                }
+                catch (ParserException ex)
+                {
+                    throw new InterpreterInternalException($"[{ex.Source}:{ex.Line}] {ex.Message}");
+                }
+                catch (FileNotFoundException ex)
+                {
+                    throw new InterpreterInternalException($"File not found: {ex.FileName}");
                 }
             });
         }

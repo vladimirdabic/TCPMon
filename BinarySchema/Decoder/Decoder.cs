@@ -174,6 +174,11 @@ namespace VD.BinarySchema
             // No implementation needed
             throw new NotImplementedException();
         }
+
+        public object Visit(Expression.String str)
+        {
+            return str.Value;
+        }
     }
 
     public class DecoderException : Exception
