@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPMon", "TCPMon\TCPMon.csproj", "{611A270E-E4B2-410A-9F95-82BE9348F96C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySchema", "BinarySchema\BinarySchema.csproj", "{8BC02CDF-25E6-4143-A7BF-CD458D4E7B46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema", "Schema\Schema.csproj", "{8BC02CDF-25E6-4143-A7BF-CD458D4E7B46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -268,9 +268,9 @@
     <None Include="Resources\binary.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BinarySchema\BinarySchema.csproj">
+    <ProjectReference Include="..\Schema\Schema.csproj">
       <Project>{8bc02cdf-25e6-4143-a7bf-cd458d4e7b46}</Project>
-      <Name>BinarySchema</Name>
+      <Name>Schema</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

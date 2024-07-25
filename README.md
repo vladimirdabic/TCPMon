@@ -2,8 +2,8 @@
 **TCPMon** is a program that allows you to send and receive data using TCP connections.\
 It's useful for debugging a protocol that you might be implementing.
 
-## BinarySchema
-Since working with bytes directly can be difficult at times, you can use BinarySchema to describe a schema for the data you're sending and receiving.
+## Schema
+Since working with bytes directly can be difficult at times, you can use Schema to describe a schema for the data you're sending and receiving.
 
 Each data monitor instance can have a schema loaded, Blaze can also work with schemas.\
 Below is an example of a schema.
@@ -57,3 +57,8 @@ The module hierarchy in TCPMon goes as follows:
         - User module
 
 All of the variables described above can be accessed from your script by using `extern var ...;`
+
+## TODO
+TCPMon is not fully finished yet, its missing some features:
+- Sending data to the server with Blaze
+- Schema array syntax for arrays that end with a byte (i.e. `char[] until 0`)

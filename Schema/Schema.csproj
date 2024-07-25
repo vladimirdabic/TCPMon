@@ -7,7 +7,7 @@
     <ProjectGuid>{8BC02CDF-25E6-4143-A7BF-CD458D4E7B46}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BinarySchema</RootNamespace>
+    <RootNamespace>Schema</RootNamespace>
     <AssemblyName>binschema</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
