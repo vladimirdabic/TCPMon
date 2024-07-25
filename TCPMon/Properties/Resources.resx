@@ -130,6 +130,9 @@
   <data name="editor_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\editor_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="binary" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\binary.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="disconnect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\disconnect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -157,7 +160,7 @@
   <data name="new_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\new_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="binary" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\binary.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="monitor_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\monitor_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

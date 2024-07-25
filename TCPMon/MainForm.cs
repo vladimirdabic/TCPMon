@@ -16,6 +16,7 @@ namespace TCPMon
     {
         private readonly NewForm _newForm = new NewForm();
         private readonly SettingsForm _settingsForm = new SettingsForm();
+        private readonly AboutForm _aboutForm = new AboutForm();
         private readonly List<ConnectionControl> _connectionControls = new List<ConnectionControl>();
         private static RichTextBox _consoleInstance;
 
@@ -162,6 +163,12 @@ namespace TCPMon
         {
             _settingsForm.StartPosition = FormStartPosition.CenterParent;
             _settingsForm.ShowDialog();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _aboutForm.StartPosition = FormStartPosition.CenterParent;
+            _aboutForm.ShowDialog();
         }
     }
 

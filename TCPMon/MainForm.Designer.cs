@@ -166,14 +166,15 @@
             // blazeToolStripMenuItem
             // 
             this.blazeToolStripMenuItem.Name = "blazeToolStripMenuItem";
-            this.blazeToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.blazeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.blazeToolStripMenuItem.Text = "Blaze";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // MainForm
             // 
