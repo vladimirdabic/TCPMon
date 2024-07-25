@@ -50,7 +50,7 @@ namespace TCPMon
             e.ChangedRange.ClearFoldingMarkers();
 
             e.ChangedRange.SetStyle(GreenStyle, @"//.*$", RegexOptions.Multiline);
-            e.ChangedRange.SetStyle(BrownStyle, @"""""|''|"".*?[^\\]""|'.*?[^\\]'");
+            e.ChangedRange.SetStyle(BrownStyle, @"""""|"".*?[^\\]""");
             e.ChangedRange.SetStyle(MaroonStyle, @"\b\d+[\.]?\d*([eE]\-?\d+)?[lLdDfF]?\b|\b0x[a-fA-F\d]+\b");
 
             if(_currentFileExt == ".blz")

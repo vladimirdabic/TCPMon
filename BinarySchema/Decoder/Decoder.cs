@@ -69,7 +69,7 @@ namespace VD.BinarySchema
             }
 
             if(entry is null)
-                Error("Entry struct not found, please define one usind '@entry'");
+                Error("Entry struct not found, please define one using '@entry'");
 
             return Evaluate(entry);
         }
