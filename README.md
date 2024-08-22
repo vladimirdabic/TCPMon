@@ -8,7 +8,7 @@ Since working with bytes directly can be difficult at times, you can use Schema 
 Each data monitor instance can have a schema loaded, Blaze can also work with schemas.\
 Below is an example of a schema.
 
-```
+```cpp
 enum packet_type :: uint8 {
     0: CHANNEL_LIST;
     1: MESSAGE;
@@ -48,6 +48,7 @@ TCPMon also has a main internal module which provides multiple libraries:
 | parse    |Convert values into different types|
 | schema   |Loading schemas for decoding data|
 | module   |Load blaze modules|
+| packet   |Library for handling packets|
 
 The module hierarchy in TCPMon goes as follows:
 - Internal Module
@@ -58,7 +59,35 @@ The module hierarchy in TCPMon goes as follows:
 
 All of the variables described above can be accessed from your script by using `extern var ...;`
 
-## TODO
-TCPMon is not fully finished yet, its missing some features:
-- Sending data to the server with Blaze
-- Schema array syntax for arrays that end with a byte (i.e. `char[] until 0`)
+Below is an example of a Blaze script (C# highligting)
+```cs
+extern var console;
+extern var connection;
+extern var parse;
+extern var packet;
+extern var schema;
+
+var packet_schema = schema.load("packet.schema");
+
+func main() {
+    console.print("Hello World");
+}
+
+event connection.received(data) {
+    var decoded = data.decode(packet_schema);
+    
+    // print out the decoded object
+    for(var pair : decoded)
+        console.print(pair[0] + ": " + parse.str(pair[1]));
+        
+    // send a response
+    var resp = packet.builder()
+        .string("Hello World");
+
+    connection.send(resp);
+}
+
+event connection.closed() {
+    console.print("Bye");
+}
+```

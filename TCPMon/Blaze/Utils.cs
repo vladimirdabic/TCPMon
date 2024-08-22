@@ -137,6 +137,14 @@ namespace TCPMon.Blaze
                     throw new InterpreterInternalException($"File not found: {ex.FileName}");
                 }
             });
+
+            Library packet_library = new Library("packet");
+            env.DefineVariable("packet", VariableType.PUBLIC, packet_library);
+
+            packet_library.DefineFunction("builder", (VM vm, List<IValue> value) =>
+            {
+                return new PacketBuilderValue();
+            });
         }
     }
 }

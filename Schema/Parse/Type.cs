@@ -132,27 +132,63 @@ namespace VD.BinarySchema.Parse
         public IType BaseType { get; private set; }
         public int Size { get; private set; }
         public string MemberName { get; private set; }
+        public int? EndingNumber { get; private set; }
+        public bool IncludeNumber { get; private set; }
 
 
         public string Name => $"{BaseType.Name}[]";
 
-        private ArrayType(IType baseType, int size, string memberName)
+        private ArrayType(IType baseType, int size, string memberName, int? endingNum, bool includeNum)
         {
             BaseType = baseType;
             Size = size;
             MemberName = memberName;
+            EndingNumber = endingNum;
+            IncludeNumber = includeNum;
         }
 
-        public ArrayType(IType baseType, int size) : this(baseType, size, null)
+        public ArrayType(IType baseType, int size) : this(baseType, size, null, null, false)
         {
         }
 
-        public ArrayType(IType baseType, string memberName) : this(baseType, 0, memberName)
+        public ArrayType(IType baseType, string memberName) : this(baseType, 0, memberName, null, false)
+        {
+        }
+
+        public ArrayType(IType baseType, int endingNum, bool includeNum) : this(baseType, 0, null, endingNum, includeNum)
         {
         }
 
         public object Decode(BinaryReader reader, SchemaDecoder decoder)
         {
+            if(EndingNumber.HasValue)
+            {
+                IntegerType type = new IntegerType(IntegerType.Size.UINT8);
+                List<DecodedValue> bytes = new List<DecodedValue>();
+
+                while(true)
+                {
+                    try
+                    {
+                        object v = BaseType.Decode(reader, decoder);
+                        
+                        if ((v.IsNumber() || v is char) && Convert.ToInt64(v) == EndingNumber.Value)
+                        {
+                            if (IncludeNumber) bytes.Add(new DecodedValue(type, v));
+                            break;
+                        }
+
+                        bytes.Add(new DecodedValue(type, v));
+                    }
+                    catch(EndOfStreamException)
+                    {
+                        break;
+                    }
+                }
+
+                return bytes.ToArray();
+            }
+
             int size;
 
             if(MemberName != null)

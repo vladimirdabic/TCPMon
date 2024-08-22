@@ -208,6 +208,15 @@ namespace VD.BinarySchema
                 }
                 else
                 {
+                    if(MatchSequence(TokenType.CLOSE_SQUARE, TokenType.UNTIL))
+                    {
+                        Token num = Consume(TokenType.NUMBER, "Expected array end byte");
+                        bool include = Match(TokenType.INCLUDED);
+
+                        return new ArrayType(type, (int)num.Value, include);
+                    }
+                    
+
                     throw new ParserException(Peek().Location.Source, Peek().Location.Line, "Expected array size");
                 }
 
@@ -314,6 +323,19 @@ namespace VD.BinarySchema
             }
 
             return false;
+        }
+
+        private bool MatchSequence(params TokenType[] types)
+        {
+            for (int i = 0; i < types.Length; i++)
+            {
+                TokenType type = types[i];
+
+                if (Peek(i).Type != type) return false;
+            }
+
+            _current += types.Length;
+            return true;
         }
 
         private bool Check(TokenType type)
