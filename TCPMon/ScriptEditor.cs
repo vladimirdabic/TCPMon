@@ -55,7 +55,7 @@ namespace TCPMon
 
             if(_currentFileExt == ".blz")
             {
-                e.ChangedRange.SetStyle(KeywordStyle, @"\b(class|func|event|static|extern|var|new|private|public)\b");
+                e.ChangedRange.SetStyle(KeywordStyle, @"\b(class|func|event|static|extern|var|new|private|public|import|export)\b");
                 e.ChangedRange.SetStyle(ControlStyle, @"\b(return|for|while|if|else|break|continue|throw|try|catch)\b");
                 e.ChangedRange.SetStyle(BoldStyle, @"\b(class)\s+(?<range>[\w_]+?)\b");
                 e.ChangedRange.SetStyle(ItalicControlStyle, @"\b(?<range>iter)\s+([\w_]+?)\b");
@@ -74,8 +74,8 @@ namespace TCPMon
 
         private void blazeModuleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fastColoredTextBox1.Text = @"extern var console;
-extern var connection;
+            fastColoredTextBox1.Text = @"import console;
+import connection;
 
 
 func main() {
